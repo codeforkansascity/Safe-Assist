@@ -1,0 +1,22 @@
+body{
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: .05px;
+    padding-bottom: .05px;
+    background-color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+}
+
+#first_name,#last_name, #init, #sex, #race, #dob, #ssn, #street, #apt, #city{
+    float: left;
+    text-align: center;
+    width: 10%;
+}
+
+#suicidal {
+    padding-top: .05px;
+    padding-bottom: .05px;
+}
