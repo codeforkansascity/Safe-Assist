@@ -1,6 +1,8 @@
 <?php
 require_once('dbconfig.php');
 session_start();
+
+
 ?>
 <form action="process_registration.php" method="POST">
   <div class="<?= $_SESSION['passworderror'] ? 'formfielderror' : 'formfield'?>">
