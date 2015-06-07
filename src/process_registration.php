@@ -26,8 +26,8 @@ if($_SESSION['usernameerror'] || $_SESSION['passworderror']) {
 
 // registration info validated, add user account
 // TODO: update to work with temporary registration table and force email validation
-$sql = "INSERT INTO USER VALUES(NULL, '" . addslashes($_POST['username']) . 
-       "', MD5('". addslashes($_POST['pw1'])."'))";
+$sql = "INSERT INTO USER (Username, Password, Usertype) VALUES('" . addslashes($_POST['username']) . 
+       "', MD5('". addslashes($_POST['pw1'])."'), 'NORMAL')";
 if(!$dbconn->query($sql)) { // TODO: internal error
 	echo $sql;
 }

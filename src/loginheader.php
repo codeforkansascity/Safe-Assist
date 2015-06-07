@@ -1,6 +1,5 @@
 <?php
 require_once("dbconfig.php");
-session_start();
 
 // check for logged-in user
 if($_SESSION['userid']) {

@@ -18,8 +18,8 @@ if($_POST['logout']) {  //process logout
     if(!$row) { //TODO: failed authentication
       $_SESSION['loginerror'] = 'failed authentication';
     } else { // valid login
-      $_SESSION['userid'] = $row['id'];
-      $_SESSION['username'] = $row['username'];
+      $_SESSION['userid'] = $row['ID'];
+      $_SESSION['username'] = $row['Username'];
     } 
   }
 }

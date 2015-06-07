@@ -7,5 +7,7 @@ $dbname = 'safeassist';
 
 $dbconn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) 
   or die('unable to connect to DB');
+  
+session_start();
 
 ?>

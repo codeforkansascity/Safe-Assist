@@ -7,5 +7,4 @@ if($_SESSION['newregistration']) {
 <?php
   unset($_SESSION['newregistration']);
 }
-
 ?>
