@@ -27,6 +27,9 @@ if($_SESSION['userid']) {
       Password: <input type="text" name="password"/>
       <input type="submit" value="login"/>
     </form>
+    <a href="register.php" alt="create a new account" class="create_account">
+      create a new account
+    </a>
   </div>
 <?php 
 }
