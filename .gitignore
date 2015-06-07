@@ -4,3 +4,5 @@ model/schema.mwb.bak
 *.php~
 
 *.sql~
+
+*.php#
