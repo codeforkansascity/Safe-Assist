@@ -7,25 +7,20 @@
 <script>
 $(document).ready(function() {
  
-    // Check if JavaScript is enabled
-    $('body').addClass('js');
- 
-    // Make the checkbox checked on load
-    $('.login span').addClass('checked').children('input').attr('checked', true);
- 
-    // Click function
-    $('.login span').on('click', function() {
- 
-        if ($(this).children('input').attr('checked')) {
-            $(this).children('input').attr('checked', false);
-            $(this).removeClass('checked');
-        }
- 
-        else {
-            $(this).children('input').attr('checked', true);
-            $(this).addClass('checked');
-        }
- 
+    $('#login_button').click( function() { 
+    	$('.backdrop').show(); 
+    	$('.login').show(); 
+    });
+    
+    $('#enroll_button').click( function() { 
+    	$('.backdrop').show(); 
+    	$('.register').show(); 
+    });
+    
+    $('.backdrop').click(function () { 
+    	$('.backdrop').hide(); 
+    	$('.login').hide();
+    	$('.register').hide();
     });
  
 });

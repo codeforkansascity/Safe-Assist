@@ -1,5 +1,5 @@
 <!-- resources/views/auth/register.blade.php -->
-
+<div class="register">
 <form method="POST" action="/auth/register">
     {!! csrf_field() !!}
 
@@ -22,3 +22,4 @@
         <button type="submit">Register</button>
     </div>
 </form>
+</div>

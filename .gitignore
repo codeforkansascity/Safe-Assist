@@ -1,14 +1,13 @@
 
 model/schema.mwb.bak
 
-*.php~
+*~
 
-*.sql~
-
-*.php#
+*#
 
 laravel-src/vendor
 
 laravel-src/node_modules
 
 laravel-src/.env
+

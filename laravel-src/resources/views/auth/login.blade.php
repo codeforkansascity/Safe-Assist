@@ -1,6 +1,9 @@
 <!-- resources/views/auth/login.blade.php -->
 
-<form method="POST" action="/auth/login">
+<div class="backdrop"></div>
+<div class="login">
+    <h1>Login</h1>
+    <form method="POST" action="/auth/login">
     {!! csrf_field() !!}
 
     <div>
@@ -14,10 +17,14 @@
     </div>
 
     <div>
-        <input type="checkbox" name="remember"> Remember Me
+        <span>
+            <input type="checkbox" name="remember">
+            <label for="checkbox">remember me</label>
+        </span>
     </div>
 
     <div>
-        <button type="submit">Login</button>
+        <button type="submit" value="log in">Login</button>
     </div>
-</form>
+    </form>
+</div>
