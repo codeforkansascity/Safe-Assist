@@ -1,8 +1,8 @@
-# Safe-Assist
+# SafeAssist
 introduction at
 http://safeassist.org/
 
-Safe-Assist is an open source application for citizen to provide information for police officer assisting them to better understand the local situation
+SafeAssist is an open-source, collaborative effort initiated by the Kansas City Missouri Police Department to provide officers and other first responders with information to aid them in more effectively managing contacts with diminished capacity persons. SafeAssist was created to provide a vehicle for caregivers and individuals to share pertinent health and behavioral information to help first responders process the dynamics of those service calls much more effectively and safely, while increasing the overall quality of service.
 
 ## Quickstart
 
