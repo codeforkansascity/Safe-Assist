@@ -1,6 +1,6 @@
 # SafeAssist
 introduction at
-http://www.safeassist.org/
+http://www.safeassist.org/staging
 
 SafeAssist is an open-source, collaborative effort initiated by the Kansas City Missouri Police Department to provide officers and other first responders with information to aid them in more effectively managing contacts with diminished capacity persons. SafeAssist was created to provide a vehicle for caregivers and individuals to share pertinent health and behavioral information to help first responders process the dynamics of those service calls much more effectively and safely, while increasing the overall quality of service.
 
