@@ -1,8 +1,10 @@
 @charset "UTF-8";
-@import url(font-awesome.min.css);
 @import url("http://fonts.googleapis.com/css?family=Roboto:500,300");
 
 /*
+	Safe-Assist site-wide CSS
+	Modified from Ion template by TEMPLATED, original header information: 
+
 	Ion by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
@@ -16,7 +18,7 @@
 
 	body, input, select, textarea {
 		color: #555f66;
-		font-family: "Roboto", Helvetica, sans-serif;
+		font-family: Helvetica, sans-serif;
 		font-size: 14pt;
 		font-weight: 300;
 		line-height: 1.75em;
@@ -63,7 +65,7 @@
 		line-height: 1.5em;
 	}
 	
-	div.inner h2, header.major h2 {
+	div.inner h2, .header .major h2 {
 		text-transform: none;
 	}
 
@@ -158,47 +160,74 @@
 		text-align: center;
 	}
 
-	header p {
+	.header p {
 		color: #bbb;
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
 
-	header h2 + p {
+	.header h2 + p {
 		font-size: 1.25em;
 		margin-top: -1em;
 		line-height: 1.5em;
 	}
 
-	header h3 + p {
+	.header h3 + p {
 		font-size: 1.1em;
 		margin-top: -0.85em;
 		line-height: 1.5em;
 	}
 
-	header h4 + p,
-	header h5 + p,
-	header h6 + p {
+	.header h4 + p,
+	.header h5 + p,
+	.header h6 + p {
 		font-size: 0.9em;
 		margin-top: -0.75em;
 		line-height: 1.5em;
 	}
 
-	header.major {
+	.header .major {
 		text-align: center;
 	}
 
-		header.major h2 {
+		.header .major h2 {
 			margin: -2em 0 1em 0;
 			font-size: 2em;
 		}
 
-		header.major p {
+		.header .major p {
 			font-size: 1.5em;
 			margin: -1em 0 2em 0;
 		}
 
 /* Form */
+	.shadowbox { /* made visible while a dialog is active */
+		display: block;
+		position: fixed;
+		top: 0%;
+		left: 0%;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		z-index: 49990;
+		-moz-opacity: 0.8;
+		opacity:.80;
+		filter: alpha(opacity=80);
+	}
+
+	dialog {
+		display: block;
+		position: fixed;
+		top: 50px;
+		width: 30%;
+		height: 300px;
+		padding: 16px;
+		border: 16px solid black;
+		background-color: white;
+		z-index: 500000;
+		overflow: auto; 
+	}
+
 
 	form {
 		margin: 0 0 2em 0;
@@ -861,7 +890,7 @@
 				color: #ffffff;
 			}
 
-			.wrapper.style2 header p {
+			.wrapper.style2 .header p {
 				color: #a3a5a7;
 			}
 
@@ -888,7 +917,7 @@
 		padding-top: 3em;
 	}
 
-	#header {
+	header {
 		background: #fff;
 		color: #555f66;
 		cursor: default;
@@ -898,11 +927,11 @@
 		position: fixed;
 		top: 0;
 		width: 100%;
-		z-index: 10000;
+		z-index: 1000;
 		box-shadow: 0 0 0.1em 0 rgba(0, 0, 0, 0.25);
 	}
 
-		#header h1 {
+		header h1 {
 			color: #666f77;
 			font-weight: 500;
 			height: inherit;
@@ -914,11 +943,11 @@
 			top: 0;
 		}
 
-			#header h1 a {
+			header h1 a {
 				font-size: 1.25em;
 			}
 
-		#header nav {
+		header nav {
 			height: inherit;
 			line-height: inherit;
 			position: absolute;
@@ -927,20 +956,20 @@
 			vertical-align: middle;
 		}
 
-			#header nav > ul {
+			header nav > ul {
 				list-style: none;
 				margin: 0;
 				padding-left: 0;
 			}
 
-				#header nav > ul > li {
+				header nav > ul > li {
 					border-radius: 6px;
 					display: inline-block;
 					margin-left: 2em;
 					padding-left: 0;
 				}
 
-					#header nav > ul > li a {
+					header nav > ul > li a {
 						-moz-transition: color 0.2s ease-in-out;
 						-webkit-transition: color 0.2s ease-in-out;
 						-o-transition: color 0.2s ease-in-out;
@@ -951,15 +980,15 @@
 						text-decoration: none;
 					}
 
-						#header nav > ul > li a:hover {
+						header nav > ul > li a:hover {
 							color: #CCCCCC;
 						}
 
-					#header nav > ul > li:first-child {
+					header nav > ul > li:first-child {
 						margin-left: 0;
 					}
 
-					#header nav > ul > li .button {
+					header nav > ul > li .button {
 						height: 2.25em;
 						line-height: 2.25em;
 						margin-bottom: 0;
@@ -969,15 +998,15 @@
 						vertical-align: middle;
 					}
 
-		#header .container {
+		header .container {
 			position: relative;
 		}
 
-			#header .container h1 {
+			header .container h1 {
 				left: 0;
 			}
 
-			#header .container nav {
+			header .container nav {
 				right: 0;
 			}
 

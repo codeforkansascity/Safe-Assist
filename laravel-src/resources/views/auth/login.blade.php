@@ -1,7 +1,6 @@
 <!-- resources/views/auth/login.blade.php -->
 
-<div class="backdrop"></div>
-<div class="login">
+<dialog class="login">
     <h1>Login</h1>
     <form method="POST" action="/auth/login">
     {!! csrf_field() !!}
@@ -27,4 +26,4 @@
         <button type="submit" value="log in">Login</button>
     </div>
     </form>
-</div>
+</dialog>

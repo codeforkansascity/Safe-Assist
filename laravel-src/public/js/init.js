@@ -112,11 +112,27 @@
 			}
 		}
 	});
-
+	
 	$(function() {
+		$('dialog').hide();
+		$('.shadowbox').hide();
 		
-		// jQuery ready stuff.
-		
+		// register event handlers
+		$('#login_button').click( function() { 
+			$('.shadowbox').show(); 
+			$('.login').show(); 
+		});
+    
+		$('#enroll_button').click( function() { 
+			$('.shadowbox').show(); 
+			$('.register').show(); 
+		});
+    
+		$('.shadowbox').click(function () { 
+			$('.shadowbox').hide(); 
+			$('.login').hide();
+			$('.register').hide();
+		});
 	});
 
 })(jQuery);

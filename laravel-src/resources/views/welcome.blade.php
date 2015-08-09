@@ -6,9 +6,10 @@
 		@include('includes.head')
 	</head>
 	<body id="top">
-
+		<div class='shadowbox'></div>
 		@include('includes.header')
 		@include('auth.register')
+		
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
@@ -23,9 +24,9 @@
 
 		<!-- One -->
 			<section id="one" class="wrapper style1">
-				<header class="major">
+				<div class="header"><div class="major">
 					<h2>Benefits for the Whole Community</h2>
-				</header>
+				</div></div>
 				<div class="container">
 					<div class="row">
 						<div class="4u">
