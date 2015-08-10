@@ -14,8 +14,12 @@
 Route::get('/', ['as' => 'welcome', function () {
     return view('welcome');
 }]);
+Route::get('/auth/loginform', ['as' => 'welcome', function () {
+    return view('auth.login');
+}]);
 
 Route::get('/home', function() { return Redirect::to('/'); });
+
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

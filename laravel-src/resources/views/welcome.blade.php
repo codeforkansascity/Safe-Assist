@@ -8,7 +8,7 @@
 	<body id="top">
 		<div class='shadowbox'></div>
 		@include('includes.header')
-		@include('auth.register')
+		@if (!Auth::check()) @include('auth.register') @endif
 		
 		<!-- Banner -->
 			<section id="banner">
@@ -16,7 +16,10 @@
 					<h2>SafeAssist</h2>
 					<p>Where information and safety meet.</p>
 					<ul class="actions">
-						<li><a id="enroll_button" class="button big special">Enroll</a></li>
+						<li>
+							@if (!Auth::check()) <a id="enroll_button" class="button big special">Enroll</a>
+							@else <div class="button big special">Welcome, {!! Auth::user()->email !!} @endif
+						</li>
 						<li><a href="#elements" class="button big alt">Learn More</a></li>
 					</ul>
 				</div>

@@ -1085,6 +1085,23 @@
 				color: #ffffff;
 				text-decoration: none;
 			}
+			
+
+/* Messages */
+
+	.error_message {
+		color: white;
+		display: block;
+		position: fixed;
+		top: 55px;
+		right: 0px;
+		width: 250px;
+		margin: 0 auto;
+		padding: 4px;
+		border: 4px solid black;
+		background-color: #bb1111;
+		z-index: 500000;
+	}
 
 /* Footer */
 
