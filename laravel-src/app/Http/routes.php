@@ -21,6 +21,11 @@ Route::get('/auth/loginform', ['as' => 'welcome', function () {
 Route::get('/home', function() { return Redirect::to('/'); });
 
 
+Route::get('/about',  function () { return view('about'); });
+Route::get('/contact',  function () { return view('contact'); });
+Route::get('/partners',  function () { return view('partners'); });
+
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
