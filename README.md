@@ -9,7 +9,7 @@ SafeAssist is an open-source, collaborative effort initiated by the Kansas City 
 Please read the [configuration page on the wiki](https://github.com/codeforkansascity/Safe-Assist/wiki/configuring-your-development-environment) for help getting started developing. Review open issues to see what types of changes we're looking for. 
 
 ## Welcome developlers to jump in and contribute
-Safe-Assist is an Open Source project and is seeking all types of contributions.  Please say hello on the Safe-Assist mailing list or join our Google Hangouts for more information.  (More information can be found at the Safe-Assist website).
+SafeAssist is an Open Source project and is seeking all types of contributions.  Please say hello on the SafeAssist mailing list or join our Google Hangouts for more information.  (More information can be found at the Safe-Assist website).
 
 
 ## Join the community!
