@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Address;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -46,6 +47,10 @@ class AuthController extends Controller
         return Validator::make($data, [
             'email' => 'required|email|max:255|unique:user',
             'password' => 'required|confirmed|min:6',
+            'street' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip1' => 'required',
         ]);
     }
 
@@ -57,7 +62,16 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+    	    
+    	$address = Address::create([
+    		'street' => $data['street'],
+    		'city' => $data['city'],
+    		'state' => $data['state'],
+    		'zip1' => $data['zip1']
+    	]);
+    	
         return User::create([
+            'address_id' => $address->id,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
