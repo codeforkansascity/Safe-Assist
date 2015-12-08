@@ -26,6 +26,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['id', 'usertype', 'password', 'remember_token'];
     
+    public function address()
+    {
+        return $this->belongsTo('App\Address');
+    }                                                            
+    
     public function is_administrator()
     {
     	    return false;
