@@ -8,13 +8,6 @@ class Address extends Model
 {
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'address';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array

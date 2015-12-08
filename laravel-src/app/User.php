@@ -13,13 +13,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable, CanResetPassword;
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'user';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -32,4 +25,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['id', 'usertype', 'password', 'remember_token'];
+    
+    public function is_administrator()
+    {
+    	    return false;
+    }
+    
+    public function is_agent()
+    {
+    	    return false;
+    }
 }
