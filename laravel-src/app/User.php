@@ -29,7 +29,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function address()
     {
         return $this->belongsTo('App\Address');
-    }                                                            
+    }           
+    
+    public function consumers() {
+    	    return $this->hasMany('App\Consumer');
+    }
+    
+    public function agent() {
+    	    return $this->hasOne('App\Agent');
+    }
     
     public function is_administrator()
     {

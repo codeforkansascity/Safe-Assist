@@ -15,12 +15,24 @@
 				<div class="inner">
 					<h2>SafeAssist</h2>
 					<p>Where information and safety meet.</p>
+					@if (Auth::check()) 
+					<p>Welcome, {!! Auth::user()->email !!}</p> 
+					@endif
 					<ul class="actions">
-						<li>
-							@if (!Auth::check()) <a id="enroll_button" class="button big special">Enroll</a>
-							@else <div class="button big special">Welcome, {!! Auth::user()->email !!} @endif
-						</li>
+					@if (!Auth::check()) 
+						<li><a id="enroll_button" class="button big special">Enroll</a></li>
 						<li><a href="#elements" class="button big alt">Learn More</a></li>
+					@else 
+						@if (Auth::user()->administrator)
+						<li><a class="button big special">Administrator Menu</a></li>
+						@endif
+						
+						@if (Auth::user()->agent)
+						<li><a id="" class="button big special">First Responder Menu</a></li>
+						@endif
+						
+						<li><a id="" class="button big special">Caregiver Menu</a></li>
+					@endif
 					</ul>
 				</div>
 			</section>
