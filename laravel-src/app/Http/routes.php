@@ -10,10 +10,10 @@ Route::get('/', ['as' => 'welcome', function () {
 }]);
 
 // UI routes
-Route::get('/profile',  function () { return view('ui.user_profile_ui'); });
-Route::get('/admin',  function () { return view('ui.administrator_ui'); });
-Route::get('/caregiver',  function () { return view('ui.caregiver_ui'); });
-Route::get('/agent',  function () { return view('ui.agent_ui'); });
+Route::get('/profile', ['middleware' => 'auth', function () { return view('ui.user_profile_ui'); }]);
+Route::get('/admin',  ['middleware' => 'auth', function () { return view('ui.administrator_ui'); }]);
+Route::get('/caregiver',  ['middleware' => 'auth', function () { return view('ui.caregiver_ui'); }]);
+Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.agent_ui'); }]);
 
 // registration routes
 Route::get('auth/register', 'Auth\AuthController@getRegister');
