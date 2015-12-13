@@ -10,7 +10,7 @@
 	<body id="top">
 		@include('includes.dialogs')
 		@include('includes.header')
-		@include('ui.includes.user_profile', ['user' => Auth::user()])
+		@include('model.user', ['user' => Auth::user()])
 	
 				
 		@include('includes.footer')
