@@ -7,36 +7,9 @@
         Email
         <input type="email" name="email" value="{{ old('email') }}">
     </div>
-
-    <div>
-        Password
-        <input type="password" name="password">
-    </div>
-
-    <div class="col-md-6">
-        Confirm Password
-        <input type="password" name="password_confirmation">
-    </div>
-
-    <div class="col-md-6">
-        Street 
-        <input type="text" name="street">
-    </div>
-
-    <div class="col-md-6">
-        City 
-        <input type="text" name="city">
-    </div>
-
-    <div class="col-md-6">
-        State 
-        <input type="text" name="state">
-    </div>
-
-    <div class="col-md-6">
-        Zip 
-        <input type="text" name="zip1">
-    </div>
+    
+    @include('model.form.change_password')
+    @include('model.form.address', ['address' => new App\Address])
 
     <div>
         <button type="submit">Register</button>
