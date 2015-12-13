@@ -7,12 +7,13 @@
 			<li><a href="/contact">Contact</a></li>
 			<li><a href="/partners">Partners</a></li>
 			@if (Auth::check()) 
-				<li><a href="/profile">Profile</a></li>
+				<li><a class="ui-link" href="/profile">Profile</a></li>
+				<li><a class="ui-link" href="/profile">Caregiver</a></li>
 				@if (Auth::user()->administrator)
-					<li><a href="/admin">Admin</a></li>
+					<li><a class="ui-link" href="/admin">Admin</a></li>
 				@endif
 				@if (Auth::user()->agent)
-					<li><a href="/agent">First Responder</a></li>
+					<li><a class="ui-link" href="/agent">First Responder</a></li>
 				@endif
 				<li><a id="logout_button" href="auth/logout" class="button special">Logout</a></li>
 			@else 
