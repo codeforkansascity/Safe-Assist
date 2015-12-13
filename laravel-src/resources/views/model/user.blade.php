@@ -8,13 +8,13 @@
 	
 	@if (Auth::user()->administrator)
 		<div class="admin-profile">
-			<p>You have been granted administrator access to this site.</p>
+			<p>This user has been granted administrator access to this site.</p>
 		</div>
 	@endif
 	
 	@if (Auth::user()->agent)
 		<div class="agencies">
-			<p>You are registered as a first responder for the following agencies:</p>
+			<p>This user is registered as a first responder for the following agencies:</p>
 			@foreach ($user->agencies as $agency)
 				@include('ui.includes.agency')
 			@endforeach
