@@ -4,7 +4,7 @@
 	<div class="last_name">{{$user->last_name}}</div>
 	<div class="last_name">{{$user->last_name}}</div>
 	<div class="email">{{$user->email}}</div>
-	@include('ui.includes.address', ['address' => $user->address])
+	@include('model.address', ['address' => $user->address])
 	
 	@if (Auth::user()->administrator)
 		<div class="admin-profile">
@@ -20,4 +20,4 @@
 			@endforeach
 		</div>
 	@endif
-</section>
+</section>	
