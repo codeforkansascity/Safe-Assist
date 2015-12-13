@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<title>SafeAssist - Safety Through Information</title>
-		@include('includes.head')
+		@include('includes.head-content')
 	</head>
 	<body id="top">
 		<div class='shadowbox'></div>
