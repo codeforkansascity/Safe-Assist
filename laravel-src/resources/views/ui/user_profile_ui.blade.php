@@ -5,14 +5,15 @@
 		<title>SafeAssist - Safety Through Information</title>
 		@include('includes.head-content')
 	</head>
+	
+	
 	<body id="top">
 		@include('includes.dialogs')
 		@include('includes.header')
-		**{!! Auth::user()->administrator !!}**
-		
-		<pre>{!! print_r(Auth::user()->address) !!}</pre>
+		@include('ui.includes.user_profile', ['user' => Auth::user()])
+	
 				
-			@include('includes.footer')
+		@include('includes.footer')
 
 	</body>
 </html>
