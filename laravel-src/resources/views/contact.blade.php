@@ -6,15 +6,9 @@
 		@include('includes.head-content')
 	</head>
 	<body id="top">
-		<div class='shadowbox'></div>
+		@include('includes.dialogs')
 		@include('includes.header')
-		@if (!Auth::check()) @include('auth.register') @endif
-		
-		
-		contact stuff
 
-				
-			@include('includes.footer')
-
+		@include('includes.footer')
 	</body>
 </html>
