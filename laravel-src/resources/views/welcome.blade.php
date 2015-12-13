@@ -22,14 +22,6 @@
 						<li><a id="enroll_button" class="button big special">Enroll</a></li>
 						<li><a href="#elements" class="button big alt">Learn More</a></li>
 					@else 
-						@if (Auth::user()->administrator)
-						<li><a class="button big special">Administrator Menu</a></li>
-						@endif
-						
-						@if (Auth::user()->agent)
-						<li><a id="" class="button big special">First Responder Menu</a></li>
-						@endif
-						
 						<li><a id="" class="button big special">Caregiver Menu</a></li>
 					@endif
 					</ul>
