@@ -1,4 +1,3 @@
-<!-- resources/views/auth/register.blade.php -->
 <dialog class="register">
 <form method="POST" action="/auth/register">
     {!! csrf_field() !!}

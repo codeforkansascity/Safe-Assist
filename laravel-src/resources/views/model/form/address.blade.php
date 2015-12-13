@@ -5,7 +5,7 @@
 	</div>
 	<div class="form_row">
 		<div class="label">City</div> 
-		<input type="text" name="street" value="{{ $address->city }}"></input>
+		<input type="text" name="city" value="{{ $address->city }}"></input>
 	</div>
 	<div class="form_row">
 		<div class="label">State</div> 
