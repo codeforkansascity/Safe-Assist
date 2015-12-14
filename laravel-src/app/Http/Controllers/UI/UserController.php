@@ -6,18 +6,16 @@ use App\User;
 use App\Address;
 use Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-    
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
+	
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+    	$this->middleware('auth');
     }
     
     /**
@@ -28,21 +26,26 @@ class UserController extends Controller
      */
     public function postUpdate(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-        ]);
-
-        $credentials = $request->only(
-            'email', 'password', 'password_confirmation', 'token'
-        );
-
+        $this->validate($request, ['id' => 'required|exists:users']);
+        $user = User::find($request->id);
+        $user->email = $request->email;
         
-        $user->password = bcrypt($password);
-
-        $user->save();
-
-        Auth::login($user);
+        $this->validate($request, array_merge([
+            'id' => 'required|exists:users',
+            'email' => 'email|max:255'.($user->isDirty('email')?'|unique:users,email':''),
+        ], Address::rules()));
+        
+        if(Auth::user()->id != $request->id && !Auth::user()->administrator) {
+        	//todo: access denied
+        } else {
+        	$user->first_name = $request->first_name;
+        	$user->last_name = $request->last_name;
+        	
+        	// todo: change address
+        	
+        	$user->save();
+        	return Redirect::to('/profile');
+        }
 
     }
 

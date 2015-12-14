@@ -18,6 +18,5 @@
 	<div class="form_row">
 		<div class="label">Zip</div>
 		<input type="text" name="zip1" value="{{ $address->zip1 }}"></input>
-		<input type="text" name="zip2" value="{{ $address->zip2 }}"></input>
 	</div>
 </div>

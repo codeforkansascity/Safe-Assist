@@ -15,7 +15,7 @@ Route::get('/caregiver',  ['middleware' => 'auth', function () { return view('ui
 Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.agent_ui'); }]);
 Route::post('/profile/grant_admin', 'UI\UserController@postGrantAdmin');
 Route::post('/profile/revoke_admin', 'UI\UserController@postRevokeAdmin');
-Route::post('/profile/update_profile', 'UI\UserController@postUpdateProfile');
+Route::post('/profile/update_profile', 'UI\UserController@postUpdate');
 Route::post('/profile/update_password', 'UI\UpdatePasswordController@postUpdate');
 
 // registration routes

@@ -1,31 +1,18 @@
-<section class="user_profile">
-	<div class="first_name">{{$user->first_name}}</div>
-	<div class="last_name">{{$user->last_name}}</div>
-	<div class="last_name">{{$user->last_name}}</div>
-	<div class="email">{{$user->email}}</div>
+
+	<div class="form_row">
+		<div class="label">Email Address</div> 
+		<input type="text" name="email" value="{{ $user->email }}"></input>
+	</div>
 	
-	<form action="/user/change_password" method="POST">
-	</form>
+	<div class="form_row">
+		<div class="label">First Name</div> 
+		<input type="text" name="first_name" value="{{ $user->first_name }}"></input>
+	</div>
 	
-	<form action="/user/update_profile" method="POST">
+	<div class="form_row">
+		<div class="label">Last Name</div> 
+		<input type="text" name="last_name" value="{{ $user->last_name }}"></input>
+	</div>
+	
 	@include('model.form.address', ['address' => $user->address])
-	</form>
-	
-	{{-- todo: allow admins to grant/revoke admin status to other users --}}
-	
-	@if ($user->agent)
-		<div class="agencies">
-			<p>This user is registered as a first responder for the following agencies:</p>
-			@foreach ($user->agencies as $agency)
-				<form action="/user/revoke_admin" method="POST">
-				@include('model.forms.agency')
-				</form>
-			@endforeach
-			
-		</div>
-	@endif
-	
-	<form action="/user/grant_admin">
-	{{-- todo: add agency form --}}
-	</form>
-</section>	
+
