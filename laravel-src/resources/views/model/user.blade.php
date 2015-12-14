@@ -6,7 +6,7 @@
 	<div class="email">{{$user->email}}</div>
 	@include('model.address', ['address' => $user->address])
 	
-	@if (Auth::user()->administrator)
+	@if ($user->administrator)
 		<div class="admin-profile">
 			<p>This user has been granted administrator access to this site.</p>
 		</div>

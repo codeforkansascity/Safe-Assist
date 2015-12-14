@@ -11,9 +11,7 @@
 		@include('includes.dialogs')
 		@include('includes.header')
 		@include('model.user', ['user' => Auth::user()])
-	
-				
+		<a href="/profile_edit" class="button special">Edit Profile</a>
 		@include('includes.footer')
-
 	</body>
 </html>
