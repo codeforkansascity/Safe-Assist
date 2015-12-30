@@ -59,7 +59,7 @@ class AuthController extends Controller
     protected function create(array $data)
     {
     	    
-    	$address = Address::create([
+    	$address = Address::retrieveOrCreate([
     		'street' => $data['street'],
     		'city' => $data['city'],
     		'state' => $data['state'],

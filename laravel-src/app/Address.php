@@ -32,4 +32,20 @@ class Address extends Model
             'zip1' => 'required',
         ];
     }
+    
+    
+    /**
+     * attempts to find a matching address before creating a new instance
+     */
+    public static function retrieveOrCreate(array $attributes = [])
+    {
+        // TODO: look up address attributes to find a match
+        $existing_addr = Address::where('street',$attributes['street'])
+          ->where('city',$attributes['city'])
+          ->where('state',$attributes['state'])
+          ->where('zip1',$attributes['zip1'])
+          ->first();
+        if($existing_addr) return $existing_addr;
+        return Address::create($attributes);
+    }
 }
