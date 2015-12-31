@@ -8,7 +8,7 @@
 			<li><a href="/partners">Partners</a></li>
 			@if (Auth::check()) 
 				<li><a class="ui-link" href="/profile">Profile</a></li>
-				<li><a class="ui-link" href="/profile">Caregiver</a></li>
+				<li><a class="ui-link" href="/caregiver">Caregiver</a></li>
 				@if (Auth::user()->administrator)
 					<li><a class="ui-link" href="/admin">Admin</a></li>
 				@endif
