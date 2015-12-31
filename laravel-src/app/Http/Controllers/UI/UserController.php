@@ -40,8 +40,13 @@ class UserController extends Controller
         } else {
         	$user->first_name = $request->first_name;
         	$user->last_name = $request->last_name;
-        	
         	// todo: change address
+        	$user->address_id = Address::retrieveOrCreate([
+        		'street' => $request->street,
+    			'city' => $request->city,
+    			'state' => $request->state,
+    			'zip1' => $request->zip1
+    		])->id;
         	
         	$user->save();
         	return Redirect::to('/profile');
