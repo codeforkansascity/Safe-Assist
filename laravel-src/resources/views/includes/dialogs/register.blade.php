@@ -1,4 +1,4 @@
-<dialog class="register">
+<dialog id="registerDialog">
 <form method="POST" action="/auth/register">
     {!! csrf_field() !!}
 

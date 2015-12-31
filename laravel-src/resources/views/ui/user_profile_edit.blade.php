@@ -8,7 +8,6 @@
 	
 	
 	<body id="top">
-		@include('includes.dialogs')
 		@include('includes.header')
 		
 		<div class="update_profile_form">

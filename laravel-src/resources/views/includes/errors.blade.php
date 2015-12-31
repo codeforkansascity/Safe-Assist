@@ -1,5 +1,3 @@
-<div class='shadowbox'></div>
-
 @if (count($errors) > 0)
 <div class="error_message">
 	<ul>
@@ -9,6 +7,3 @@
 	</ul>
 </div>
 @endif
-
-@if (!Auth::check()) @include('auth.login') @endif
-@if (!Auth::check()) @include('auth.register') @endif

@@ -214,7 +214,7 @@
 		opacity:.80;
 		filter: alpha(opacity=80);
 	}
-
+	
 	dialog {
 		display: block;
 		position: fixed;
