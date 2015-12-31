@@ -19,7 +19,7 @@ class UserController extends Controller
     }
     
     /**
-     * Reset the given user's password.
+     * update the given user's profile info.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
