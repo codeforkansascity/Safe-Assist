@@ -1,15 +1,6 @@
-<!DOCTYPE HTML>
+@extends('layouts.master')
 
-<html>
-	<head>
-		<title>SafeAssist - Safety Through Information</title>
-		@include('includes.head-content')
-	</head>
-	
-	
-	<body id="top">
-		@include('includes.header')
-		
+@section('content')
 		<div class="update_profile_form">
 		<form action="/profile/update_profile" method="POST">
 			{!! csrf_field() !!}
@@ -48,7 +39,4 @@
 		<form action="/user/grant_admin">
 		{{-- todo: add agency form --}}
 		</form>
-		
-		@include('includes.footer')
-	</body>
-</html>
+@stop

@@ -1,16 +1,6 @@
-<!DOCTYPE HTML>
+@extends('layouts.master')
 
-<html>
-	<head>
-		<title>SafeAssist - Safety Through Information</title>
-		@include('includes.head-content')
-	</head>
-	<body id="top">
-		@include('includes.header')
-		
-		@include('info.main-banner')
-		@include('info.infobar')
-		@include('includes.footer')
-
-	</body>
-</html>
+@section('content')
+	@include('info.main-banner')
+	@include('info.infobar')
+@stop
