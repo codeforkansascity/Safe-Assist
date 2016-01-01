@@ -209,7 +209,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: black;
-		z-index: 49990;
+		z-index: 400000;
 		-moz-opacity: 0.8;
 		opacity:.80;
 		filter: alpha(opacity=80);

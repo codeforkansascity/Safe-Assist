@@ -6,15 +6,15 @@ $(document).ready(function() {
 	// set up dialog pop-up buttons
 	$('.triggersDialog').click( function() { 
 		var dialog = $('#'+$(this).attr('data-dialog'));
-		
-		dialog.wrap($('<div class="shadowbox"></div>')); 
-		
+		$('body').append($('<div class="shadowbox"></div>')); 
+		$('.shadowbox').hide();
+		$('.shadowbox').fadeIn();
 		$('.shadowbox').click(function () { 
-				dialog.unwrap();
-				dialog.hide();
+			$('.shadowbox').remove();
+			dialog.hide();
 		});
 		
-		dialog.show(); 
+		dialog.fadeIn(); 
 	});
     
 	// show error messages (briefly)
