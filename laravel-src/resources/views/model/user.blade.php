@@ -18,4 +18,4 @@
 			@endforeach
 		</div>
 	@endif
-</section>	
+</section>
