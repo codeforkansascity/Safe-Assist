@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['id', 'usertype', 'password', 'remember_token'];
+    protected $hidden = ['id', 'password', 'remember_token'];
     
     public function address()
     {
@@ -32,7 +32,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }           
     
     public function consumers() {
-    	    return $this->hasMany('App\Consumer');
+    	    return $this->hasMany('App\Consumer', 'sponsor');
     }
     
     public function agencies() {

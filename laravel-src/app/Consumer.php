@@ -12,7 +12,7 @@ class Consumer extends Model
      *
      * @var array
      */
-    protected $fillable = ['street', 'city', 'state', 'zip1', 'zip2'];
+    protected $fillable = [ 'address_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -20,4 +20,15 @@ class Consumer extends Model
      * @var array
      */
     protected $hidden = ['id'];
+    
+    
+    public function agencies() 
+    {
+    	    return $this->belongsTo('App\Consumer', 'sponsor');
+    }
+        
+    public function address()
+    {
+        return $this->belongsTo('App\Address');
+    }    
 }
