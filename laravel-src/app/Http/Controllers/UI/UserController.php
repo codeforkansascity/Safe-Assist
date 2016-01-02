@@ -36,11 +36,11 @@ class UserController extends Controller
         ], Address::rules()));
         
         if(Auth::user()->id != $request->id && !Auth::user()->administrator) {
-        	//todo: access denied
+        	//todo: access denied (handle w/ middleware instead of controller?)
         } else {
         	$user->first_name = $request->first_name;
         	$user->last_name = $request->last_name;
-        	// todo: change address
+
         	$user->address_id = Address::retrieveOrCreate([
         		'street' => $request->street,
     			'city' => $request->city,

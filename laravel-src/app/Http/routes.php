@@ -11,12 +11,15 @@ Route::get('/', ['as' => 'welcome', function () { return view('welcome'); }]);
 Route::get('/profile', ['middleware' => 'auth', function () { return view('ui.user_profile'); }]);
 Route::get('/user_edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
 Route::get('/consumer_edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
+Route::get('/consumer_register', ['middleware' => 'auth', function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
 Route::get('/admin',  ['middleware' => 'auth', function () { return view('ui.administrator_ui'); }]);
 Route::get('/caregiver',  ['middleware' => 'auth', function () { return view('ui.caregiver_ui'); }]);
 Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.agent_ui'); }]);
 Route::post('/profile/grant_admin', 'UI\UserController@postGrantAdmin');
 Route::post('/profile/revoke_admin', 'UI\UserController@postRevokeAdmin');
-Route::post('/profile/update_profile', 'UI\UserController@postUpdate');
+Route::post('/profile/update_user', 'UI\UserController@postUpdate');
+Route::post('/profile/update_consumer', 'UI\ConsumerController@postUpdate');
+Route::post('/profile/register_consumer', 'UI\ConsumerController@postRegister');
 Route::post('/profile/update_password', 'UI\UpdatePasswordController@postUpdate');
 
 // registration routes

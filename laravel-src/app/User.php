@@ -12,19 +12,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['email', 'password', 'address_id'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['id', 'password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token'];
     
     public function address()
     {

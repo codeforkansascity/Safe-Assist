@@ -11,8 +11,7 @@
 	
 	
 	<div class="form_row">
-		<div class="label">Description</div> <textarea rows="4" cols="50">{{$consumer->description}}</textarea>
+		<div class="label">Description</div> <textarea name="description" rows="4" cols="50">{{$consumer->description}}</textarea>
 	</div>
 	
-	@include('model.form.address', ['address' => $consumer->address])
-
+	@include('model.form.address', ['address' => $consumer->address ? $consumer->address : new App\Address])

@@ -2,7 +2,7 @@
 
 @section('content')
 		<div class="update_profile_form">
-		<form action="/profile/update_profile" method="POST">
+		<form action="/profile/update_user" method="POST">
 			{!! csrf_field() !!}
 			<h2>update profile</h2>
 			@include('model.form.user', ['user' => $user]) 
