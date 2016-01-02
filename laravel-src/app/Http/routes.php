@@ -9,7 +9,7 @@ Route::get('/', ['as' => 'welcome', function () { return view('welcome'); }]);
 
 // UI routes
 Route::get('/profile', ['middleware' => 'auth', function () { return view('ui.user_profile'); }]);
-Route::get('/profile_edit', ['middleware' => 'auth', function () { return view('ui.user_profile_edit'); }]);
+Route::get('/user_edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
 Route::get('/admin',  ['middleware' => 'auth', function () { return view('ui.administrator_ui'); }]);
 Route::get('/caregiver',  ['middleware' => 'auth', function () { return view('ui.caregiver_ui'); }]);
 Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.agent_ui'); }]);

@@ -5,8 +5,8 @@
 		<form action="/profile/update_profile" method="POST">
 			{!! csrf_field() !!}
 			<h2>update profile</h2>
-			@include('model.form.user', ['user' => Auth::user()]) 
-			<input type="hidden" name="id" value="{{Auth::user()->id}}">
+			@include('model.form.user', ['user' => $user]) 
+			<input type="hidden" name="id" value="{{$user->id}}">
 			<input type="submit" value="save"/>
 		</form>	
 		</div>
@@ -16,7 +16,7 @@
 			{!! csrf_field() !!}
 			<h2>update password</h2>
 			@include('model.form.change_password')
-			<input type="hidden" name="id" value="{{Auth::user()->id}}">
+			<input type="hidden" name="id" value="{{$user->id}}">
 			<input type="submit" value="save"/>
 		</form>
 		</div>
@@ -24,10 +24,10 @@
 		
 		{{-- todo: allow admins to grant/revoke admin status to other users --}}
 	
-		@if (Auth::user()->agent)
+		@if ($user->agent)
 		<div class="agencies">
 			<p>This user is registered as a first responder for the following agencies:</p>
-			@foreach (Auth::user()->agencies as $agency)
+			@foreach ($user()->agencies as $agency)
 				<form action="/user/revoke_admin" method="POST">
 				@include('model.forms.agency')
 				</form>

@@ -2,5 +2,5 @@
 
 @section('content')
 	@include('model.user', ['user' => Auth::user()])
-	<a href="/profile_edit" class="button special">Edit Profile</a>
+	<a href="/user_edit/{{Auth::user()->id}}" class="button special">Edit Profile</a>
 @stop

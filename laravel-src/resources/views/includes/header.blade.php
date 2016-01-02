@@ -2,7 +2,7 @@
 @if (!Auth::check()) @include('includes.dialogs.login') @endif
 @if (!Auth::check()) @include('includes.dialogs.register') @endif
 <header id="header" class="skel-layers-fixed">
-	<a href="/" target="_top"><img src="images/safe-assist-banner.jpg" title="Safe Assist Logo" alt="Safe Assist Logo" /></a>
+	<a href="/" target="_top"><img src="/images/safe-assist-banner.jpg" title="Safe Assist Logo" alt="Safe Assist Logo" /></a>
 	<nav id="nav">
 		<ul>
 			<li><a href="/">Home</a> </li>
