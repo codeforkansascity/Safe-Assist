@@ -49,9 +49,35 @@ class UserController extends Controller
     		])->id;
         	
         	$user->save();
-        	return Redirect::to('/profile');
+        	return Redirect::to('/profile/'.$request->id);
         }
 
+    }
+
+    
+    /**
+     * delete the given user's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteUser(Request $request)
+    {
+    	
+        $this->validate($request, ['id' => 'required|exists:users']);
+        $user = User::find($request->id);
+        foreach($user->consumers as $consumer) {
+        	// TODO: re-assign these to someone instead of deleting?
+        	$consumer->delete();
+        }
+        $user->delete();
+        
+        if($user->id == Auth::user()->id) { // they're deleting themselves
+        	Auth::logout();
+            return Redirect::to('/');
+        }
+        
+        return Redirect::to('/admin');
     }
 
 }
