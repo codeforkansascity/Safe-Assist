@@ -7,8 +7,8 @@
     <div class="form_row">
         <div class="label">User ID</div>
         <input type="text" name="id"/>
-        <input type="submit" value="search" />
     </div>
+    <input type="submit" value="search" />
 </form>
     @if(Session::has('userSearchResults'))
         @if(count(Session::get('userSearchResults')) == 0)
