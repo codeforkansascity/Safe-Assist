@@ -18,7 +18,7 @@
 				@if (Auth::user()->agent)
 					<li><a class="ui-link" href="/agent">First Responder</a></li>
 				@endif
-				<li><a id="logout_button" href="auth/logout" class="button special">Logout</a></li>
+				<li><a id="logout_button" href="/auth/logout" class="button special">Logout</a></li>
 			@else 
 				<li><a id="enroll_button" class="button special triggersDialog" data-dialog="registerDialog">Enroll</a></li>
 				<li><a id="login_button" class="button special triggersDialog" data-dialog="loginDialog">Sign In</a></li>
