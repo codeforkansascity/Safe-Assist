@@ -11,7 +11,7 @@
     <input type="submit" value="search" />
 </form>
     @if(Session::has('userSearchResults'))
-        @if(count(Session::get('userSearchResults')) == 0)
+        @if(Session::get('userSearchResults')->count() == 0)
             <p>No results found from previous search.</p>
         @endif
     @endif

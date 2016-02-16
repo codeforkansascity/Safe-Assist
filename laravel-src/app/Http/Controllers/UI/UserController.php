@@ -30,17 +30,15 @@ class UserController extends Controller
             'id' => 'exists:users'
         ]);
 
-        $users = array(); // will hold id's of all users found
-
         if($request->id) { //search for user with given id...
-            $users[] = $request->id;
+            $users = User::where('id', '=', $request->id)->get();
         } else { // search for users matching *ALL* search criteria
             //TODO...
         }
 
         Session::put('userSearchResults', $users);
-        if(count($users) == 1) { // go directly to that user's profile if only 1
-            return Redirect::to('/profile/'.$users[0]);
+        if($users->count() == 1) { // go directly to that user's profile if only 1
+            return Redirect::to('/profile/'.$users->first()->id);
         } else { // 0 users found or > 1 users found
             return Redirect::to('/admin');
         }
