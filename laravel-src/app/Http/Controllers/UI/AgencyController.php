@@ -92,7 +92,7 @@ class AgencyController extends Controller
 
         $agency = Agency::find($request->id);
         $agency->users()->attach($request->user_id);
-        Redirect::to('/user/view/'.$request->user_id);
+        return Redirect::to('/user/view/'.$request->user_id);
     }
 
     public function postLeave(Request $request) {
@@ -103,7 +103,7 @@ class AgencyController extends Controller
 
         $agency = Agency::find($request->id);
         $agency->users()->detach($request->user_id);
-        Redirect::to('/user/view/'.$request->user_id);
+        return Redirect::to('/user/view/'.$request->user_id);
     }
 
 }
