@@ -12,3 +12,6 @@ INSERT INTO `consumers` (`id`, `sponsor`, `first_name`, `last_name`, `descriptio
 (1, 3, 'billy', 'jean', 'may respond defensively to physical touch', 3, NULL, NULL),
 (2, 3, 'john', 'henry', 'can''t hear verbal commands', 3, NULL, NULL);
 
+INSERT INTO `agencies` VALUES 
+(1,'KC Police Department',3,'2016-02-20 18:48:11','2016-02-20 18:48:11'),
+(2,'KC Fire Department',4,'2016-02-20 18:48:37','2016-02-20 18:49:03');
