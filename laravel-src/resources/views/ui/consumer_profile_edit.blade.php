@@ -3,9 +3,9 @@
 @section('content')
 		<div class="update_consumer_form">
 		@if(isset($consumer->id))
-		<form action="/profile/update_consumer" method="POST">
+		<form action="/consumer/update" method="POST">
 		@else
-		<form action="/profile/register_consumer" method="POST">
+		<form action="/consumer/register" method="POST">
 		@endif
 			{!! csrf_field() !!}
 			<h2>update profile</h2>

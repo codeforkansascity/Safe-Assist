@@ -1,5 +1,5 @@
 <dialog id="registerDialog">
-<form method="POST" action="/auth/register">
+<form method="POST" action="/user/register">
     {!! csrf_field() !!}
 
     <div>

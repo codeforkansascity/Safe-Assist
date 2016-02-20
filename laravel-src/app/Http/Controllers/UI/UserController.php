@@ -25,7 +25,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postSerachUsers(Request $request) {
+    public function postSearch(Request $request) {
         $this->validate($request,[
             'id' => 'exists:users'
         ]);
@@ -38,9 +38,9 @@ class UserController extends Controller
 
         Session::put('userSearchResults', $users);
         if($users->count() == 1) { // go directly to that user's profile if only 1
-            return Redirect::to('/profile/'.$users->first()->id);
+            return Redirect::to('/user/view/'.$users->first()->id);
         } else { // 0 users found or > 1 users found
-            return Redirect::to('/admin');
+            return Redirect::to('/user/list');
         }
     }
     
@@ -75,7 +75,7 @@ class UserController extends Controller
     		])->id;
         	
         	$user->save();
-        	return Redirect::to('/profile/'.$request->id);
+        	return Redirect::to('/user/view/'.$request->id);
         }
 
     }
@@ -87,7 +87,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function deleteUser(Request $request)
+    public function postDelete(Request $request)
     {
     	
         $this->validate($request, ['id' => 'required|exists:users']);

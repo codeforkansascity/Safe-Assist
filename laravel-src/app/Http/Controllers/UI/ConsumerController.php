@@ -67,7 +67,22 @@ class ConsumerController extends Controller
     	])->id;
         	
         $consumer->save();
-        return Redirect::to('/caregiver');
+        return Redirect::to('/consumer/dashboard');
     }
-    
+
+
+    /**
+     * search for consumers given various criteria
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postSerachUsers(Request $request) {
+        $consumers = array(); // will hold id's of all consumers found
+
+        $consumers = Consumer::where('description', 'LIKE', '%value%')->get();
+
+        Session::put('consumerSearchResults', $consumers);
+        return Redirect::to('/consumer/list');
+    }
 }

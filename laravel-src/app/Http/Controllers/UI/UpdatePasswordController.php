@@ -39,7 +39,7 @@ class UpdatePasswordController extends Controller
         	$user = User::find($request->id);
         	$user->password = bcrypt($request->password);
         	$user->save();
-        	return Redirect::to('/profile');
+        	return Redirect::to('/user/view');
         }
 
     }

@@ -2,7 +2,7 @@
 
 @section('content')
 <h2>Look up User</h2>
-<form action="/profile/search" method="POST">
+<form action="/user/search" method="POST">
     {!! csrf_field() !!}
     <div class="form_row">
         <div class="label">User ID</div>
@@ -10,9 +10,9 @@
     </div>
     <input type="submit" value="search" />
 </form>
-    @if(Session::has('userSearchResults'))
-        @if(Session::get('userSearchResults')->count() == 0)
-            <p>No results found from previous search.</p>
-        @endif
+@if(Session::has('userSearchResults'))
+    @if(Session::get('userSearchResults')->count() == 0)
+        <p>No results found from previous search.</p>
     @endif
+@endif
 @stop

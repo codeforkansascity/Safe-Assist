@@ -8,26 +8,40 @@ Route::get('/partners',  function () { return view('partners'); });
 Route::get('/', ['as' => 'welcome', function () { return view('welcome'); }]);
 
 // UI routes
-Route::get('/profile/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile', ['user' => App\User::find($id)]); }]);
-Route::get('/profile', ['middleware' => 'auth', function () { return view('ui.user_profile', ['user' => Auth::user()]); }]);
-Route::get('/user_edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
-Route::get('/consumer_edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
-Route::get('/consumer_register', ['middleware' => 'auth', function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
+Route::get('/user/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile', ['user' => App\User::find($id)]); }]);
+Route::get('/user/view', ['middleware' => 'auth', function () { return view('ui.user_profile', ['user' => Auth::user()]); }]);
+Route::get('/user/list', ['middleware' => 'auth', function () { return view('ui.user_list'); }]);
+Route::get('/user/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
+Route::get('/user/logout', 'Auth\AuthController@getLogout');
+
+Route::post('/user/login', 'Auth\AuthController@postLogin');
+Route::post('/user/register', 'Auth\AuthController@postRegister');
+Route::post('/user/update', 'UI\UserController@postUpdate');
+Route::post('/user/delete', 'UI\UserController@postDelete');
+Route::post('/user/grant_admin', 'UI\UserController@postGrantAdmin');
+Route::post('/user/revoke_admin', 'UI\UserController@postRevokeAdmin');
+Route::post('/user/join_agency', 'UI\UserController@postJoinAgency');
+Route::post('/user/leave_agency', 'UI\UserController@postLeaveAgency');
+Route::post('/user/update_password', 'UI\UpdatePasswordController@postUpdate');
+Route::post('/user/search', 'UI\UserController@postSearch');
+
+Route::get('/consumer/dashboard',  ['middleware' => 'auth', function () { return view('ui.caregiver_ui'); }]);
+Route::get('/consumer/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
+Route::get('/consumer/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
+Route::get('/consumer/register', ['middleware' => 'auth', function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
+Route::get('/consumer/list', ['middleware' => 'auth', function () { return view('ui.consumer_list'); }]);
+
+Route::post('/consumer/search', 'UI\ConsumerController@postSearch');
+Route::post('/consumer/update', 'UI\ConsumerController@postUpdate');
+Route::post('/consumer/register', 'UI\ConsumerController@postRegister');
+
 Route::get('/admin',  ['middleware' => 'auth', function () { return view('ui.administrator_ui'); }]);
-Route::get('/caregiver',  ['middleware' => 'auth', function () { return view('ui.caregiver_ui'); }]);
+
 Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.agent_ui'); }]);
-Route::post('/profile/search', 'UI\UserController@postSerachUsers');
-Route::post('/profile/grant_admin', 'UI\UserController@postGrantAdmin');
-Route::post('/profile/revoke_admin', 'UI\UserController@postRevokeAdmin');
-Route::post('/profile/update_user', 'UI\UserController@postUpdate');
-Route::post('/profile/delete_user', 'UI\UserController@deleteUser');
-Route::post('/profile/update_consumer', 'UI\ConsumerController@postUpdate');
-Route::post('/profile/register_consumer', 'UI\ConsumerController@postRegister');
-Route::post('/profile/update_password', 'UI\UpdatePasswordController@postUpdate');
 
-// registration routes
-Route::post('/auth/register', 'Auth\AuthController@postRegister');
-
-// authentication routes
-Route::post('/auth/login', 'Auth\AuthController@postLogin');
-Route::get('/auth/logout', 'Auth\AuthController@getLogout');
+Route::get('/agency/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile', ['user' => App\Agency::find($id)]); }]);
+Route::get('/agency/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile_edit', ['user' => App\Agency::find($id)]); }]);
+Route::get('/agency/list', ['middleware' => 'auth', function () { return view('ui.agency_list'); }]);
+Route::post('/agency/search', 'UI\AgencyController@postSearch');
+Route::post('/agency/update', 'UI\AgencyController@postUpdate');
+Route::post('/agency/register', 'UI\AgencyController@postRegister');

@@ -2,7 +2,7 @@
 
 <dialog id="loginDialog">
     <h1>Login</h1>
-    <form method="POST" action="/auth/login">
+    <form method="POST" action="/user/login">
     {!! csrf_field() !!}
 
     <div>

@@ -2,7 +2,7 @@
 
 @section('content')
 		<div class="update_profile_form">
-		<form action="/profile/update_user" method="POST">
+		<form action="/user/update" method="POST">
 			{!! csrf_field() !!}
 			<h2>update profile</h2>
 			@include('model.form.user', ['user' => $user]) 
@@ -12,7 +12,7 @@
 		</div>
 		
 		<div class="update_password_form">
-		<form action="/profile/update_password" method="POST">
+		<form action="/user/update_password" method="POST">
 			{!! csrf_field() !!}
 			<h2>update password</h2>
 			@include('model.form.change_password')
