@@ -15,13 +15,13 @@
 	@endif
 
 
-	@if(Auth::user()->administrator)
+	@if(Auth::user()->administrator and App\Agency::all()->diff($user->agencies)->count()))
 		<h2>Add User to Agency</h2>
 		<div class="add_agency">
 			<form action="/agency/join" method="POST">
 				{!! csrf_field() !!}
 				<select name="id">
-					@foreach(App\Agency::all() as $agency)
+					@foreach(App\Agency::all()->diff($user->agencies) as $agency)
 						<option value="{{$agency->id}}">{{$agency->name}}</option>
 					@endforeach
 				</select>
