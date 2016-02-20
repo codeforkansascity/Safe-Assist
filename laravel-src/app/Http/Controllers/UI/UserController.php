@@ -32,8 +32,10 @@ class UserController extends Controller
 
         if($request->id) { //search for user with given id...
             $users = User::where('id', '=', $request->id)->get();
-        } else { // search for users matching *ALL* search criteria
-            //TODO...
+        } else { // search matching any field
+            $users = User::where('email', 'LIKE', "%$request->search%")
+                ->orWhere('first_name', 'LIKE', "%$request->search%")
+                ->orWhere('last_name', 'LIKE', "%$request->search%")->get();
         }
 
         Session::put('userSearchResults', $users);

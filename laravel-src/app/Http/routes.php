@@ -10,7 +10,7 @@ Route::get('/', ['as' => 'welcome', function () { return view('welcome'); }]);
 // UI routes
 Route::get('/user/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile', ['user' => App\User::find($id)]); }]);
 Route::get('/user/view', ['middleware' => 'auth', function () { return view('ui.user_profile', ['user' => Auth::user()]); }]);
-Route::get('/user/list', ['middleware' => 'auth', function () { return view('ui.user_list'); }]);
+Route::get('/user/list', ['middleware' => 'auth', function () { return view('ui.user_search_list'); }]);
 Route::get('/user/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
 Route::get('/user/logout', 'Auth\AuthController@getLogout');
 
@@ -29,7 +29,7 @@ Route::get('/consumer/dashboard',  ['middleware' => 'auth', function () { return
 Route::get('/consumer/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
 Route::get('/consumer/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
 Route::get('/consumer/register', ['middleware' => 'auth', function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
-Route::get('/consumer/list', ['middleware' => 'auth', function () { return view('ui.consumer_list'); }]);
+Route::get('/consumer/list', ['middleware' => 'auth', function () { return view('ui.consumer_search_list'); }]);
 
 Route::post('/consumer/search', 'UI\ConsumerController@postSearch');
 Route::post('/consumer/update', 'UI\ConsumerController@postUpdate');
@@ -41,7 +41,7 @@ Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.age
 
 Route::get('/agency/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile', ['user' => App\Agency::find($id)]); }]);
 Route::get('/agency/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile_edit', ['user' => App\Agency::find($id)]); }]);
-Route::get('/agency/list', ['middleware' => 'auth', function () { return view('ui.agency_list'); }]);
+Route::get('/agency/list', ['middleware' => 'auth', function () { return view('ui.agency_search_list'); }]);
 Route::post('/agency/search', 'UI\AgencyController@postSearch');
 Route::post('/agency/update', 'UI\AgencyController@postUpdate');
 Route::post('/agency/register', 'UI\AgencyController@postRegister');
