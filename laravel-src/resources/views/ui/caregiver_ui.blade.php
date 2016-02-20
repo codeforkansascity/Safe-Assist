@@ -2,5 +2,5 @@
 
 @section('content')
 	@include('model.consumer_list', ['consumers' => Auth::user()->consumers])
-	<a class="button" href="consumer_register">add</a>
+	<a class="button" href="/consumer/register">add</a>
 @stop
