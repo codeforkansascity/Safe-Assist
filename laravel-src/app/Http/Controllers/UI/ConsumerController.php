@@ -6,6 +6,7 @@ use App\User;
 use App\Consumer;
 use App\Address;
 use Validator;
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

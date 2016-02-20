@@ -20,8 +20,6 @@ Route::post('/user/update', 'UI\UserController@postUpdate');
 Route::post('/user/delete', 'UI\UserController@postDelete');
 Route::post('/user/grant_admin', 'UI\UserController@postGrantAdmin');
 Route::post('/user/revoke_admin', 'UI\UserController@postRevokeAdmin');
-Route::post('/user/join_agency', 'UI\UserController@postJoinAgency');
-Route::post('/user/leave_agency', 'UI\UserController@postLeaveAgency');
 Route::post('/user/update_password', 'UI\UpdatePasswordController@postUpdate');
 Route::post('/user/search', 'UI\UserController@postSearch');
 
@@ -39,9 +37,12 @@ Route::get('/admin',  ['middleware' => 'auth', function () { return view('ui.adm
 
 Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.agent_ui'); }]);
 
-Route::get('/agency/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile', ['user' => App\Agency::find($id)]); }]);
-Route::get('/agency/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile_edit', ['user' => App\Agency::find($id)]); }]);
+Route::get('/agency/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile', ['agency' => App\Agency::find($id)]); }]);
+Route::get('/agency/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile_edit', ['agency' => App\Agency::find($id)]); }]);
 Route::get('/agency/list', ['middleware' => 'auth', function () { return view('ui.agency_search_list'); }]);
+Route::get('/agency/register', ['middleware' => 'auth', function () { return view('ui.agency_profile_edit', ['agency' => new App\Agency ]); }]);
 Route::post('/agency/search', 'UI\AgencyController@postSearch');
 Route::post('/agency/update', 'UI\AgencyController@postUpdate');
+Route::post('/agency/join', 'UI\UserController@postJoin');
+Route::post('/agency/leave', 'UI\UserController@postLeave');
 Route::post('/agency/register', 'UI\AgencyController@postRegister');

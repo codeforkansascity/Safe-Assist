@@ -11,4 +11,10 @@ class Agency extends Model
 	public function agents() {
 		return $this->belongsToMany('App\User', 'users_has_agencies');
 	}
+
+	public function address()
+	{
+		return $this->belongsTo('App\Address');
+	}
+
 }
