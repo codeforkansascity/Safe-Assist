@@ -10,11 +10,11 @@
 		</div>
 	@endif
 	
-	@if ($user->agent)
+	@if ($user->agencies)
 		<div class="agencies">
 			<p>This user is registered as a first responder for the following agencies:</p>
 			@foreach ($user->agencies as $agency)
-				@include('ui.includes.agency')
+				@include('model.agency')
 			@endforeach
 		</div>
 	@endif

@@ -28,15 +28,16 @@
 		<div class="agencies">
 			<p>This user is registered as a first responder for the following agencies:</p>
 			@foreach ($user()->agencies as $agency)
-				<form action="/user/revoke_admin" method="POST">
+				<form action="/agency/leave" method="POST">
 				@include('model.forms.agency')
+				@if(Auth::user()->administrator)
+					<input type="hidden" name="id" value="{{$agency->id}}"/>
+					<input type="hidden" name="user_id" value="{{$user->id}}"/>
+					<input type="submit" name="remove" value="remove"/>
+				@endif
 				</form>
 			@endforeach
 			
 		</div>
 		@endif
-	
-		<form action="/user/grant_admin">
-		{{-- todo: add agency form --}}
-		</form>
 @stop

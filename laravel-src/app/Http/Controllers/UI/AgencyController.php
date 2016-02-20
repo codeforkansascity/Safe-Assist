@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UI;
 
 use App\Agency;
 use App\Address;
+use App\User;
 use Validator;
 use Session;
 use App\Http\Controllers\Controller;
@@ -82,4 +83,27 @@ class AgencyController extends Controller
             return Redirect::to('/agency/list');
         }
     }
+
+    public function postJoin(Request $request) {
+        $this->validate($request,[
+            'id' => 'exists:agencies',
+            'user_id' => 'exists:users,id'
+        ]);
+
+        $agency = Agency::find($request->id);
+        $agency->users()->attach($request->user_id);
+        Redirect::to('/user/view/'.$request->user_id);
+    }
+
+    public function postLeave(Request $request) {
+        $this->validate($request,[
+            'id' => 'exists:agencies',
+            'user_id' => 'exists:users,id'
+        ]);
+
+        $agency = Agency::find($request->id);
+        $agency->users()->detach($request->user_id);
+        Redirect::to('/user/view/'.$request->user_id);
+    }
+
 }

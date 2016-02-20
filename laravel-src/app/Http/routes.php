@@ -43,6 +43,6 @@ Route::get('/agency/list', ['middleware' => 'auth', function () { return view('u
 Route::get('/agency/register', ['middleware' => 'auth', function () { return view('ui.agency_profile_edit', ['agency' => new App\Agency ]); }]);
 Route::post('/agency/search', 'UI\AgencyController@postSearch');
 Route::post('/agency/update', 'UI\AgencyController@postUpdate');
-Route::post('/agency/join', 'UI\UserController@postJoin');
-Route::post('/agency/leave', 'UI\UserController@postLeave');
+Route::post('/agency/join', 'UI\AgencyController@postJoin');
+Route::post('/agency/leave', 'UI\AgencyController@postLeave');
 Route::post('/agency/register', 'UI\AgencyController@postRegister');

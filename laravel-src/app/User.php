@@ -25,6 +25,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
     
     public function agencies() {
-    	    return $this->belongsToMany('App\Agency', 'users_has_agencies');
+    	    return $this->belongsToMany('App\Agency');
     }
 }

@@ -17,4 +17,7 @@ class Agency extends Model
 		return $this->belongsTo('App\Address');
 	}
 
+	public function users() {
+		return $this->belongsToMany('App\User');
+	}
 }
