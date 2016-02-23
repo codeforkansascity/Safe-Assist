@@ -78,11 +78,8 @@ class ConsumerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postSerachUsers(Request $request) {
-        $consumers = array(); // will hold id's of all consumers found
-
-        $consumers = Consumer::where('description', 'LIKE', '%value%')->get();
-
+    public function postSearch(Request $request) {
+        $consumers = Consumer::where('description', 'LIKE', "%$request->keyword%")->get();
         Session::put('consumerSearchResults', $consumers);
         return Redirect::to('/consumer/list');
     }

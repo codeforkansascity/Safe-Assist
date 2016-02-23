@@ -15,7 +15,7 @@
 				@if (Auth::user()->administrator)
 					<li><a class="ui-link" href="/admin">Admin</a></li>
 				@endif
-				@if (Auth::user()->agent)
+				@if (Auth::user()->is_agent())
 					<li><a class="ui-link" href="/agent">First Responder</a></li>
 				@endif
 				<li><a id="logout_button" href="/user/logout" class="button special">Logout</a></li>

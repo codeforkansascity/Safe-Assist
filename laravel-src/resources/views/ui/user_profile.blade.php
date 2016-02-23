@@ -31,7 +31,7 @@
 		</div>
 	@endif
 
-	@if(Auth::user()->administrator and $user->agencies->count())
+	@if(Auth::user()->administrator and $user->is_agent())
 		<h2>Remove User from Agency</h2>
 		<div class="remove_agency">
 			<form action="/agency/leave" method="POST">

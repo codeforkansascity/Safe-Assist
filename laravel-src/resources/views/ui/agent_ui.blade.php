@@ -1,15 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
-<select name="agency">
     <h1>Search For Consumers</h1>
-    <form action="">
+    <form action="/consumer/search" method="post">
         {!! csrf_field() !!}
-        @foreach(Auth::user()->agencies as $agency)
-        <option value="$agency->id">{{$agency->name}}</option>
-        @endforeach
         <div class="form_row">
-            <div class="label">User ID</div>
+            <div class="label">Agency: </div>
+            <select name="agency">
+            @foreach(Auth::user()->agencies as $agency)
+                <option value="$agency->id">{{$agency->name}}</option>
+            @endforeach
+            </select>
+        </div>
+        <div class="form_row">
+            <div class="label">Search Term</div>
             <input type="text" name="keyword"/>
         </div>
         <input type="submit" value="search" />
