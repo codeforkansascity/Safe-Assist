@@ -24,7 +24,8 @@ Route::post('/user/update_password', 'UI\UpdatePasswordController@postUpdate');
 Route::post('/user/search', 'UI\UserController@postSearch');
 
 Route::get('/consumer/dashboard',  ['middleware' => 'auth', function () { return view('ui.caregiver_ui'); }]);
-Route::get('/consumer/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
+Route::get('/consumer/view/{id}', ['middleware' => ['auth', 'consumerAccess'],
+    function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
 Route::get('/consumer/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
 Route::get('/consumer/register', ['middleware' => 'auth', function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
 Route::get('/consumer/list', ['middleware' => 'auth', function () { return view('ui.consumer_search_list'); }]);
