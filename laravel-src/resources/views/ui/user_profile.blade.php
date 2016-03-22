@@ -22,7 +22,7 @@
 	@endif
 
 
-	@if(Auth::user()->administrator and App\Agency::all()->diff($user->agencies)->count()))
+	@if(Auth::user()->administrator and App\Agency::all()->diff($user->agencies)->count())
 		<h2>Add User to Agency</h2>
 		<div class="add_agency">
 			<form action="/agency/join" method="POST">
