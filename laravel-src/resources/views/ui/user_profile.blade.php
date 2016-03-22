@@ -12,6 +12,13 @@
 	  <input type="hidden" name="id" value="{{$user->id}}"/>
 	  <input type="submit" value="Delete Profile" class="button special">
 	</form>
+		@if(!$user->administrator) 	
+			<form action="/user/grant_admin" method="POST">
+				{!! csrf_field() !!}
+				<input type="hidden" name="id" value="{{$user->id}}"/>
+				<input type="submit" value="Make Administrator" class="button special">
+			</form>
+		@endif
 	@endif
 
 

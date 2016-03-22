@@ -107,5 +107,22 @@ class UserController extends Controller
         
         return Redirect::to('/admin');
     }
+    
+    /**
+     * make a user an administrator
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postGrantAdmin(Request $request)
+    {
+    	
+        $this->validate($request, ['id' => 'required|exists:users']);
+        $user = User::find($request->id);
+        $user->administrator = 1;        	
+        $user->save();
+        
+        return Redirect::to('/user/view/'.$user->id);
+    }
 
 }
