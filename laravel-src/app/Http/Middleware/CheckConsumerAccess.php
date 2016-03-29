@@ -19,7 +19,7 @@ class CheckConsumerAccess
     }
 
     private function find_consumer_id($request) {	    
-    	if($request->method() == 'get')  // get for
+    	if($request->method() == 'get')  
     		return $request->segments()[count($request->segments())-1]; // get ID at the end of the request URI
     	else 
     		return $request->id;
@@ -44,10 +44,6 @@ class CheckConsumerAccess
     		case 'edit':
     			$cid = $this->find_consumer_id($request);
     			if($this->is_caretaker_viewing_own_consumer($cid))
-    				return $next($request);
-    			break;
-    		case 'search':
-    			if(Auth::user()->is_agent())
     				return $next($request);
     			break;
     		case 'delete':

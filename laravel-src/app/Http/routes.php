@@ -10,43 +10,66 @@ Route::post('/user/login', 'Auth\AuthController@postLogin');
 Route::post('/user/register', 'Auth\AuthController@postRegister');
 
 // gated routes
-Route::get('/user/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile', ['user' => App\User::find($id)]); }]);
-Route::get('/user/view', ['middleware' => 'auth', function () { return view('ui.user_profile', ['user' => Auth::user()]); }]);
-Route::get('/user/list', ['middleware' => 'auth', function () { return view('ui.user_search_list'); }]);
-Route::get('/user/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
+Route::get('/user/view/{id}', ['middleware' => 'auth', 
+	function ($id) { return view('ui.user_profile', ['user' => App\User::find($id)]); }]);
+Route::get('/user/view', ['middleware' => 'auth', 
+	function () { return view('ui.user_profile', ['user' => Auth::user()]); }]);
+Route::get('/user/list', ['middleware' => ['auth', 'role:administrator'], 
+	function () { return view('ui.user_search_list'); }]);
+Route::get('/user/edit/{id}', ['middleware' => 'auth', 
+	function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
 Route::get('/user/logout', 'Auth\AuthController@getLogout');
 
 Route::post('/user/update', 'UI\UserController@postUpdate');
-Route::post('/user/delete', 'UI\UserController@postDelete');
-Route::post('/user/grant_admin', 'UI\UserController@postGrantAdmin');
-Route::post('/user/revoke_admin', 'UI\UserController@postRevokeAdmin');
+Route::post('/user/delete', ['middleware' => ['auth', 'role:administrator'],
+	                     'uses' => 'UI\UserController@postDelete']);
+Route::post('/user/grant_admin', ['middleware' => ['auth', 'role:administrator'],
+	                     'uses' => 'UI\UserController@postGrantAdmin']);
+Route::post('/user/revoke_admin', ['middleware' => ['auth', 'role:administrator'],
+	                     'uses' => 'UI\UserController@postRevokeAdmin']);
 Route::post('/user/update_password', 'UI\UpdatePasswordController@postUpdate');
-Route::post('/user/search', 'UI\UserController@postSearch');
+Route::post('/user/search', ['middleware' => ['auth', 'role:administrator'],
+	                     'uses' => 'UI\UserController@postSearch']);
 
-Route::get('/consumer/dashboard',  ['middleware' => 'auth', function () { return view('ui.caregiver_ui'); }]);
+Route::get('/consumer/dashboard',  ['middleware' => 'auth', 
+	function () { return view('ui.caregiver_ui'); }]);
 Route::get('/consumer/view/{id}', ['middleware' => ['auth', 'consumerAccess:view'],
     function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
-Route::get('/consumer/edit/{id}', ['middleware' => ['auth', 'consumerAccess:edit'], function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
-Route::get('/consumer/register', ['middleware' => 'auth', function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
-Route::get('/consumer/list', ['middleware' => 'auth', function () { return view('ui.consumer_search_list'); }]);
+Route::get('/consumer/edit/{id}', ['middleware' => ['auth', 'consumerAccess:edit'], 
+	function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
+Route::get('/consumer/register', ['middleware' => 'auth', 
+	function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
+Route::get('/consumer/list', ['middleware' => 'auth', 
+	function () { return view('ui.consumer_search_list'); }]);
 
-Route::post('/consumer/search', ['middleware' => ['auth', 'consumerAccess:search'], 
+Route::post('/consumer/search', ['middleware' => ['auth', 'role:agent'], 
 	                         'uses' => 'UI\ConsumerController@postSearch']);
 Route::post('/consumer/update', ['middleware' => ['auth', 'consumerAccess:view'],
 	                         'uses' => 'UI\ConsumerController@postUpdate']);
 Route::post('/consumer/register', ['middleware' => ['auth'],
 	                           'uses' => 'UI\ConsumerController@postRegister']);
 
-Route::get('/admin',  ['middleware' => 'auth', function () { return view('ui.administrator_ui'); }]);
+Route::get('/admin',  ['middleware' => ['auth', 'role:administrator'],
+	function () { return view('ui.administrator_ui'); }]);
 
-Route::get('/agent',  ['middleware' => 'auth', function () { return view('ui.agent_ui'); }]);
+Route::get('/agent',  ['middleware' => ['auth', 'role:agent'], 
+	function () { return view('ui.agent_ui'); }]);
 
-Route::get('/agency/view/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile', ['agency' => App\Agency::find($id)]); }]);
-Route::get('/agency/edit/{id}', ['middleware' => 'auth', function ($id) { return view('ui.agency_profile_edit', ['agency' => App\Agency::find($id)]); }]);
-Route::get('/agency/list', ['middleware' => 'auth', function () { return view('ui.agency_search_list'); }]);
-Route::get('/agency/register', ['middleware' => 'auth', function () { return view('ui.agency_profile_edit', ['agency' => new App\Agency ]); }]);
-Route::post('/agency/search', 'UI\AgencyController@postSearch');
-Route::post('/agency/update', 'UI\AgencyController@postUpdate');
-Route::post('/agency/join', 'UI\AgencyController@postJoin');
-Route::post('/agency/leave', 'UI\AgencyController@postLeave');
-Route::post('/agency/register', 'UI\AgencyController@postRegister');
+Route::get('/agency/view/{id}', ['middleware' => 'auth', 
+	function ($id) { return view('ui.agency_profile', ['agency' => App\Agency::find($id)]); }]);
+Route::get('/agency/edit/{id}', ['middleware' => ['auth', 'role:administrator'], 
+	function ($id) { return view('ui.agency_profile_edit', ['agency' => App\Agency::find($id)]); }]);
+Route::get('/agency/list', ['middleware' => ['auth', 'role:administrator'],
+	function () { return view('ui.agency_search_list'); }]);
+Route::get('/agency/register', ['middleware' => ['auth', 'role:administrator'], 
+	function () { return view('ui.agency_profile_edit', ['agency' => new App\Agency ]); }]);
+Route::post('/agency/search', ['middleware' => ['auth', 'role:administrator'],
+	                           'uses' => 'UI\AgencyController@postSearch']);
+Route::post('/agency/update', ['middleware' => ['auth', 'role:administrator'],
+	                           'uses' => 'UI\AgencyController@postUpdate']);
+Route::post('/agency/join', ['middleware' => ['auth', 'role:administrator'],
+	                           'uses' => 'UI\AgencyController@postJoin']);
+Route::post('/agency/leave', ['middleware' => ['auth', 'role:administrator'],
+	                           'uses' => 'UI\AgencyController@postLeave']);
+Route::post('/agency/register', ['middleware' => ['auth', 'role:administrator'],
+	                           'uses' => 'UI\AgencyController@postRegister']);
