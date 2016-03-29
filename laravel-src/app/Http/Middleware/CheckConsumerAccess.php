@@ -7,7 +7,24 @@ use Auth;
 use Session;
 
 class CheckConsumerAccess
-{
+{	
+    private function is_caretaker_viewing_own_consumer($cid) {
+    	    return Auth::user()->consumers->contains('id', $cid);
+    }
+    
+    private function is_agent_viewing_searched_consumer($cid) {
+    	    return Auth::user()->is_agent() and 
+    	    	Session::get('consumerSearchResults') != null and
+    		Session::get('consumerSearchResults')->contains('id', $cid);
+    }
+
+    private function find_consumer_id($request) {	    
+    	if($request->method() == 'get')  // get for
+    		return $request->segments()[count($request->segments())-1]; // get ID at the end of the request URI
+    	else 
+    		return $request->id;
+    }
+	
     /**
      * Determine if the user has access to view this consumer's profile
      *
@@ -15,19 +32,31 @@ class CheckConsumerAccess
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
-        $cid = $request->segments()[count($request->segments())-1]; // get ID at the end of the request URI
+    public function handle($request, Closure $next, $action)
+    {	
+    	switch($action) {
+    		case 'view':
+    			$cid = $this->find_consumer_id($request);
+    			if($this->is_agent_viewing_searched_consumer($cid) or 
+    				$this->is_caretaker_viewing_own_consumer($cid))
+    				return $next($request);
+    			break;
+    		case 'edit':
+    			$cid = $this->find_consumer_id($request);
+    			if($this->is_caretaker_viewing_own_consumer($cid))
+    				return $next($request);
+    			break;
+    		case 'search':
+    			if(Auth::user()->is_agent())
+    				return $next($request);
+    			break;
+    		case 'delete':
+    			$cid = $this->find_consumer_id($request);
+    			if($this->is_caretaker_viewing_own_consumer($cid))
+    				return $next($request);
+    			break;
+    	}
 
-        if ((Auth::user()->is_agent() and Session::get('consumerSearchResults')->contains('id', $cid))
-                // if the user is an agent and this consumer was in their last search result
-            or Auth::user()->consumers->contains('id', $cid)
-                // or the user is the caretaker for this consumer
-        ) { // ...then they can view the consumer profile
-            return $next($request);
-        }
-
-        abort('401', 'No privileges to view consumer');
+        abort('401', 'No privileges to '. ($action ? 'edit ' : 'view') . ' consumer');
     }
-
 }
