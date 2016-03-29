@@ -46,6 +46,10 @@ class CheckConsumerAccess
     			if($this->is_caretaker_viewing_own_consumer($cid))
     				return $next($request);
     			break;
+    		case 'create':
+    			if(!Auth::user()->is_agent())  // done let agents create consumer profiles
+    				return $next($request);
+    			break;
     		case 'delete':
     			$cid = $this->find_consumer_id($request);
     			if($this->is_caretaker_viewing_own_consumer($cid))

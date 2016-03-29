@@ -11,7 +11,9 @@
 			<li><a href="/partners">Partners</a></li>
 			@if (Auth::check()) 
 				<li><a class="ui-link" href="/user/view">Profile</a></li>
+				@if (!Auth::user()->is_agent())
 				<li><a class="ui-link" href="/consumer/dashboard">Caregiver</a></li>
+				@endif
 				@if (Auth::user()->administrator)
 					<li><a class="ui-link" href="/admin">Admin</a></li>
 				@endif

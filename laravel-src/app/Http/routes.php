@@ -31,13 +31,13 @@ Route::post('/user/update_password', 'UI\UpdatePasswordController@postUpdate');
 Route::post('/user/search', ['middleware' => ['auth', 'role:administrator'],
 	                     'uses' => 'UI\UserController@postSearch']);
 
-Route::get('/consumer/dashboard',  ['middleware' => 'auth', 
+Route::get('/consumer/dashboard',  ['middleware' => ['auth', 'consumerAccess:create'], 
 	function () { return view('ui.caregiver_ui'); }]);
 Route::get('/consumer/view/{id}', ['middleware' => ['auth', 'consumerAccess:view'],
     function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
 Route::get('/consumer/edit/{id}', ['middleware' => ['auth', 'consumerAccess:edit'], 
 	function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
-Route::get('/consumer/register', ['middleware' => 'auth', 
+Route::get('/consumer/register', ['middleware' => ['auth', 'consumerAccess:create'],
 	function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
 Route::get('/consumer/list', ['middleware' => 'auth', 
 	function () { return view('ui.consumer_search_list'); }]);
@@ -46,7 +46,7 @@ Route::post('/consumer/search', ['middleware' => ['auth', 'role:agent'],
 	                         'uses' => 'UI\ConsumerController@postSearch']);
 Route::post('/consumer/update', ['middleware' => ['auth', 'consumerAccess:view'],
 	                         'uses' => 'UI\ConsumerController@postUpdate']);
-Route::post('/consumer/register', ['middleware' => ['auth'],
+Route::post('/consumer/register', ['middleware' => ['auth', 'consumerAccess:create'],
 	                           'uses' => 'UI\ConsumerController@postRegister']);
 Route::post('/consumer/delete', ['middleware' => ['auth', 'consumerAccess:delete'],
 	                     'uses' => 'UI\ConsumerController@postDelete']);
