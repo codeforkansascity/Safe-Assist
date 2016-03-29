@@ -82,4 +82,21 @@ class ConsumerController extends Controller
         Session::put('consumerSearchResults', $consumers);
         return Redirect::to('/consumer/list');
     }
+    
+    
+    
+    /**
+     * delete the given consumer's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postDelete(Request $request)
+    {
+        $this->validate($request, ['id' => 'required|exists:consumers']);
+        $consumer = Consumer::find($request->id);
+        $consumer->delete();
+        
+        return Redirect::to('/consumer/dashboard');
+    }
 }

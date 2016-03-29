@@ -48,6 +48,8 @@ Route::post('/consumer/update', ['middleware' => ['auth', 'consumerAccess:view']
 	                         'uses' => 'UI\ConsumerController@postUpdate']);
 Route::post('/consumer/register', ['middleware' => ['auth'],
 	                           'uses' => 'UI\ConsumerController@postRegister']);
+Route::post('/consumer/delete', ['middleware' => ['auth', 'consumerAccess:delete'],
+	                     'uses' => 'UI\ConsumerController@postDelete']);
 
 Route::get('/admin',  ['middleware' => ['auth', 'role:administrator'],
 	function () { return view('ui.administrator_ui'); }]);
