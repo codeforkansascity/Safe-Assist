@@ -32,15 +32,9 @@ class UpdatePasswordController extends Controller
             'id' => 'required|exists:users',
             'password' => 'required|confirmed',
         ]);
-        
-        if(Auth::user()->id != $request->id && !Auth::user()->administrator) {
-        	//todo: access denied
-        } else {
-        	$user = User::find($request->id);
-        	$user->password = bcrypt($request->password);
-        	$user->save();
-        	return Redirect::to('/user/view');
-        }
-
+        $user = User::find($request->id);
+        $user->password = bcrypt($request->password);
+        $user->save();
+      	return Redirect::to('/user/view');
     }
 }

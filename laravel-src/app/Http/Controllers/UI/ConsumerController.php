@@ -55,7 +55,6 @@ class ConsumerController extends Controller
             'description' => 'required',
         ], Address::rules()));
         
-        // TODO: check to see if logged in user is a caregiver for this consumer
         $consumer->first_name = $request->first_name;
         $consumer->last_name = $request->last_name;
         $consumer->description = $request->description;

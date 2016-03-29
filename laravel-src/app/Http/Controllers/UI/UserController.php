@@ -63,23 +63,18 @@ class UserController extends Controller
             'email' => 'email|max:255'.($user->isDirty('email')?'|unique:users,email':''),
         ], Address::rules()));
         
-        if(Auth::user()->id != $request->id && !Auth::user()->administrator) {
-        	//todo: access denied (handle w/ middleware instead of controller?)
-        } else {
-        	$user->first_name = $request->first_name;
-        	$user->last_name = $request->last_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
 
-        	$user->address_id = Address::retrieveOrCreate([
-        		'street' => $request->street,
-    			'city' => $request->city,
-    			'state' => $request->state,
-    			'zip1' => $request->zip1
-    		])->id;
+        $user->address_id = Address::retrieveOrCreate([
+        	'street' => $request->street,
+    		'city' => $request->city,
+    		'state' => $request->state,
+    		'zip1' => $request->zip1
+    	])->id;
         	
-        	$user->save();
-        	return Redirect::to('/user/view/'.$request->id);
-        }
-
+        $user->save();
+        return Redirect::to('/user/view/'.$request->id);
     }
 
     
