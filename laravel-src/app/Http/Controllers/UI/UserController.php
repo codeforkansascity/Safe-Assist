@@ -124,5 +124,22 @@ class UserController extends Controller
         
         return Redirect::to('/user/view/'.$user->id);
     }
+    
+    /**
+     * make a user no longer an administrator
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRevokeAdmin(Request $request)
+    {
+    	
+        $this->validate($request, ['id' => 'required|exists:users']);
+        $user = User::find($request->id);
+        $user->administrator = 0;        	
+        $user->save();
+        
+        return Redirect::to('/user/view/'.$user->id);
+    }
 
 }

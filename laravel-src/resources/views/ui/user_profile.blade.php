@@ -18,6 +18,12 @@
 				<input type="hidden" name="id" value="{{$user->id}}"/>
 				<input type="submit" value="Make Administrator" class="button special">
 			</form>
+		@else
+			<form action="/user/revoke_admin" method="POST">
+				{!! csrf_field() !!}
+				<input type="hidden" name="id" value="{{$user->id}}"/>
+				<input type="submit" value="Revoke Administrator" class="button special">
+			</form>
 		@endif
 	@endif
 
