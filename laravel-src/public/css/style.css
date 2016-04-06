@@ -1139,3 +1139,8 @@
 		#footer .icons a {
 			color: #bbb;
 		}
+		
+/* content specific - consumer */
+.disabled_consumer_profile {
+	background: #bbbbbb;
+}

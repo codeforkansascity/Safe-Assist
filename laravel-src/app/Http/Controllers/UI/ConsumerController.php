@@ -78,7 +78,9 @@ class ConsumerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function postSearch(Request $request) {
-        $consumers = Consumer::where('description', 'LIKE', "%$request->keyword%")->get();
+        $consumers = Consumer::where('description', 'LIKE', "%$request->keyword%") // match query criteria
+        ->where('disabled', '=', 0)  // consumer profile is not hidden (disabled)
+        ->get();
         Session::put('consumerSearchResults', $consumers);
         return Redirect::to('/consumer/list');
     }
@@ -96,6 +98,38 @@ class ConsumerController extends Controller
         $this->validate($request, ['id' => 'required|exists:consumers']);
         $consumer = Consumer::find($request->id);
         $consumer->delete();
+        
+        return Redirect::to('/consumer/dashboard');
+    }
+    
+    /**
+     * disable the given consumer's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postDisable(Request $request)
+    {
+        $this->validate($request, ['id' => 'required|exists:consumers']);
+        $consumer = Consumer::find($request->id);
+        $consumer->disabled = 1;
+        $consumer->save();
+        
+        return Redirect::to('/consumer/dashboard');
+    }
+    
+    /**
+     * enable the given consumer's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postEnable(Request $request)
+    {
+        $this->validate($request, ['id' => 'required|exists:consumers']);
+        $consumer = Consumer::find($request->id);
+        $consumer->disabled = 0;
+        $consumer->save();
         
         return Redirect::to('/consumer/dashboard');
     }

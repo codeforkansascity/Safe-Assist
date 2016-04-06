@@ -50,6 +50,10 @@ Route::post('/consumer/register', ['middleware' => ['auth', 'consumerAccess:crea
 	                           'uses' => 'UI\ConsumerController@postRegister']);
 Route::post('/consumer/delete', ['middleware' => ['auth', 'consumerAccess:delete'],
 	                     'uses' => 'UI\ConsumerController@postDelete']);
+Route::post('/consumer/disable', ['middleware' => ['auth', 'consumerAccess:delete'],
+	                     'uses' => 'UI\ConsumerController@postDisable']);
+Route::post('/consumer/enable', ['middleware' => ['auth', 'consumerAccess:delete'],
+	                     'uses' => 'UI\ConsumerController@postEnable']);
 
 Route::get('/admin',  ['middleware' => ['auth', 'role:administrator'],
 	function () { return view('ui.administrator_ui'); }]);

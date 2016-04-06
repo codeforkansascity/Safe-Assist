@@ -13,7 +13,9 @@ class CheckConsumerAccess
     }
     
     private function is_agent_viewing_searched_consumer($cid) {
+    	    $consumer = Consumer::find($cid);
     	    return Auth::user()->is_agent() and 
+    	    	!$cid->disabled and
     	    	Session::get('consumerSearchResults') != null and
     		Session::get('consumerSearchResults')->contains('id', $cid);
     }
