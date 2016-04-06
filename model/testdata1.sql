@@ -8,9 +8,9 @@ INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `admi
 (3, 'test1@spamdecoy.net', '$2y$10$qUYDHDDtqAqdg.8hxUIwYukA1ms25eFPWt6gklrfVBIRfyCmAFHHC', 'test', 'person', 0, 'NcWrDIm6tWt58fhHJ2yFRvD5nFrBf4BzpDAl8C4kIGtTCiOcQDp7aX1k2SQR', 3, '2016-01-02 08:19:41', '2016-01-02 08:24:39'),
 (4, 'test2@spamdecoy.net', '$2y$10$sOCxmDOiXtAfv.w4h2faK.d7GGOEXF6SWt547iUU5/LUxjLnKJMZ.', 'other', 'person', 1, '3gYd0FCojNgSuABIKhCR2jdthWfJHESdzDN1NGCa8ISZilltktzyrbHJ16QN', 4, '2016-01-02 08:22:05', '2016-01-02 08:25:44');
 
-INSERT INTO `consumers` (`id`, `sponsor`, `first_name`, `last_name`, `description`, `address_id`, `created_at`, `updated_at`) VALUES
-(1, 3, 'billy', 'jean', 'may respond defensively to physical touch', 3, NULL, NULL),
-(2, 3, 'john', 'henry', 'can''t hear verbal commands', 3, NULL, NULL);
+INSERT INTO `consumers` (`id`, `disabled`, `sponsor`, `first_name`, `last_name`, `description`, `address_id`, `created_at`, `updated_at`) VALUES
+(1, 0, 3, 'billy', 'jean', 'may respond defensively to physical touch', 3, NULL, NULL),
+(2, 1, 3, 'john', 'henry', 'can''t hear verbal commands', 3, NULL, NULL);
 
 INSERT INTO `agencies` VALUES 
 (1,'KC Police Department',3,'2016-02-20 18:48:11','2016-02-20 18:48:11'),
