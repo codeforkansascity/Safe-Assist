@@ -30,6 +30,10 @@ Route::post('/user/revoke_admin', ['middleware' => ['auth', 'role:administrator'
 Route::post('/user/update_password', 'UI\UpdatePasswordController@postUpdate');
 Route::post('/user/search', ['middleware' => ['auth', 'role:administrator'],
 	                     'uses' => 'UI\UserController@postSearch']);
+Route::post('/user/disable', ['middleware' => ['auth'],
+	                     'uses' => 'UI\UserController@postDisable']);
+Route::post('/user/enable', ['middleware' => ['auth'],
+	                     'uses' => 'UI\UserController@postEnable']);
 
 Route::get('/consumer/dashboard',  ['middleware' => ['auth', 'consumerAccess:create'], 
 	function () { return view('ui.caregiver_ui'); }]);

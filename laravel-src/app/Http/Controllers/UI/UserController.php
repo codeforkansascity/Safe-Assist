@@ -136,5 +136,38 @@ class UserController extends Controller
         
         return Redirect::to('/user/view/'.$user->id);
     }
+    
+    
+    /**
+     * disable the given user's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postDisable(Request $request)
+    {
+        $this->validate($request, ['id' => 'required|exists:users']);
+        $consumer = User::find($request->id);
+        $consumer->disabled = 1;
+        $consumer->save();
+        
+        return Redirect::to('/user/view/'.$request->id);
+    }
+    
+    /**
+     * enable the given user's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postEnable(Request $request)
+    {
+        $this->validate($request, ['id' => 'required|exists:users']);
+        $consumer = User::find($request->id);
+        $consumer->disabled = 0;
+        $consumer->save();
+        
+        return Redirect::to('/user/view/'.$request->id);
+    }
 
 }

@@ -4,6 +4,19 @@
 	@include('model.user', ['user' => $user])
 	@if (Auth::user()->administrator || Auth::user()->id == $user->id)
 	<a href="/user/edit/{{$user->id}}" class="button special">Edit Profile</a>
+		@if(Auth::user()->disabled)
+			<form action="/user/enable" method="POST">
+				{!! csrf_field() !!}
+				<input type="hidden" name="id" value="{{$user->id}}"/>
+				<input type="submit" value="Enable Profile" class="button special">
+			</form>
+		@else
+			<form action="/user/disable" method="POST">
+				{!! csrf_field() !!}
+				<input type="hidden" name="id" value="{{$user->id}}"/>
+				<input type="submit" value="Disable Profile" class="button special">
+			</form>
+		@endif
 	@endif
 	
 	@if (Auth::user()->administrator)

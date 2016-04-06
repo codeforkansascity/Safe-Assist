@@ -1144,3 +1144,7 @@
 .disabled_consumer_profile {
 	background: #bbbbbb;
 }
+/* content specific - user */
+.disabled_user_profile {
+	background: #bbbbbb;
+}

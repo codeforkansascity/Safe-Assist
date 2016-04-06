@@ -1,4 +1,4 @@
-<section class="user_profile">
+<section class="user_profile {{$user->disabled ? 'disabled_user_profile' : ''}}">
 	<div class="first_name">{{$user->first_name}}</div>
 	<div class="last_name">{{$user->last_name}}</div>
 	<div class="email">{{$user->email}}</div>
