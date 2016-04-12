@@ -48,7 +48,7 @@ Route::get('/consumer/list', ['middleware' => 'auth',
 
 Route::post('/consumer/search', ['middleware' => ['auth', 'role:agent'], 
 	                         'uses' => 'UI\ConsumerController@postSearch']);
-Route::post('/consumer/update', ['middleware' => ['auth', 'consumerAccess:view'],
+Route::post('/consumer/update', ['middleware' => ['auth', 'consumerAccess:edit'],
 	                         'uses' => 'UI\ConsumerController@postUpdate']);
 Route::post('/consumer/register', ['middleware' => ['auth', 'consumerAccess:create'],
 	                           'uses' => 'UI\ConsumerController@postRegister']);
