@@ -1,4 +1,4 @@
 <section class="agency_profile">
-    <div class="name">{{$agency->name}}</div>
+	@include('model.field_row', ['name' => 'name', 'description' => 'Agency Name', 'value' => $agency->name])
     @include('model.address', ['address' => $agency->address])
 </section>

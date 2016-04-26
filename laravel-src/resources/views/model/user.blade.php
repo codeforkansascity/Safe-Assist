@@ -1,7 +1,7 @@
 <section class="user_profile {{$user->disabled ? 'disabled_user_profile' : ''}}">
-	<div class="first_name">{{$user->first_name}}</div>
-	<div class="last_name">{{$user->last_name}}</div>
-	<div class="email">{{$user->email}}</div>
+	@include('model.field_row', ['name' => 'first_name', 'description' => 'First Name', 'value' => $user->first_name])
+	@include('model.field_row', ['name' => 'last_name', 'description' => 'Last Name', 'value' => $user->last_name])
+	@include('model.field_row', ['name' => 'email', 'description' => 'Email Address', 'value' => $user->email])
 	@include('model.address', ['address' => $user->address])
 	
 	@if ($user->administrator)
