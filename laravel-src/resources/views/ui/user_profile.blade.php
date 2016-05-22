@@ -51,6 +51,8 @@
 						<option value="{{$agency->id}}">{{$agency->name}}</option>
 					@endforeach
 				</select>
+				@include('model.form.textfield', ['name' => 'position', 'description' => 'Position / Title',
+					'value' => ''])
 				<input type="hidden" name="user_id" value="{{$user->id}}"/>
 				<input type="submit" name="join" value="join"/>
 			</form>

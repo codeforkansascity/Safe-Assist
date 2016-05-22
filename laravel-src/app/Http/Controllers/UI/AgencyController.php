@@ -86,12 +86,13 @@ class AgencyController extends Controller
 
     public function postJoin(Request $request) {
         $this->validate($request,[
-            'id' => 'exists:agencies',
-            'user_id' => 'exists:users,id'
+            'id' => 'required|exists:agencies',
+            'user_id' => 'required|exists:users,id',
+            'position' => 'required'
         ]);
 
         $agency = Agency::find($request->id);
-        $agency->users()->attach($request->user_id);
+        $agency->users()->attach($request->user_id, ['position' => $request->position]);
         return Redirect::to('/user/view/'.$request->user_id);
     }
 
