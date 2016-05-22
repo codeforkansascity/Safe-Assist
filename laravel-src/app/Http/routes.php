@@ -38,14 +38,20 @@ Route::post('/user/enable', ['middleware' => ['auth'],
 Route::get('/consumer/dashboard',  ['middleware' => ['auth', 'consumerAccess:create'], 
 	function () { return view('ui.caregiver_ui'); }]);
 Route::get('/consumer/view/{id}', ['middleware' => ['auth', 'consumerAccess:view'],
-    function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
-Route::get('/consumer/edit/{id}', ['middleware' => ['auth', 'consumerAccess:edit'], 
+	function ($id) { return view('ui.consumer_profile', ['consumer' => App\Consumer::find($id)]); }]);
+Route::get('/consumer/edit/{id}', ['middleware' => ['auth', 'consumerAccess:edit'],
 	function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
 Route::get('/consumer/register', ['middleware' => ['auth', 'consumerAccess:create'],
 	function () { return view('ui.consumer_profile_edit', ['consumer' => 
 		Session::has('submitted_consumer') ? Session::get('submitted_consumer') : new App\Consumer ]); }]);
 Route::get('/consumer/list', ['middleware' => 'auth', 
 	function () { return view('ui.consumer_search_list'); }]);
+Route::get('/contact/add/{consumer_id}', ['middleware' => ['auth', 'consumerAccess:edit'],
+	function ($consumer_id) { return view('ui.contact_profile_edit',
+			['contact' => NULL, 'consumer_id' => $consumer_id]); }]);
+Route::get('/contact/edit/{contact_id}/{consumer_id}', ['middleware' => ['auth', 'consumerAccess:edit'],
+	function ($contact_id, $consumer_id) { return view('ui.contact_profile_edit',
+			['contact' => App\Contact::find($contact_id), 'consumer_id' => $consumer_id]); }]);
 
 Route::post('/consumer/search', ['middleware' => ['auth', 'role:agent'], 
 	                         'uses' => 'UI\ConsumerController@postSearch']);
@@ -59,6 +65,12 @@ Route::post('/consumer/disable', ['middleware' => ['auth', 'consumerAccess:delet
 	                     'uses' => 'UI\ConsumerController@postDisable']);
 Route::post('/consumer/enable', ['middleware' => ['auth', 'consumerAccess:delete'],
 	                     'uses' => 'UI\ConsumerController@postEnable']);
+Route::post('/contact/add', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postAddContact']);
+Route::post('/contact/update', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postEditContact']);
+Route::post('/contact/delete', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postDeleteContact']);
 
 Route::get('/admin',  ['middleware' => ['auth', 'role:administrator'],
 	function () { return view('ui.administrator_ui'); }]);

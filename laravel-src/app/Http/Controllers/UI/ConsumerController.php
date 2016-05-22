@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UI;
 
 use App\User;
 use App\Consumer;
+use App\Contact;
 use App\Address;
 use Validator;
 use Session;
@@ -33,7 +34,7 @@ class ConsumerController extends Controller
 
         return $this->validateAndSaveConsumer($request, $consumer);
     }
-    
+
     /**
      * create a new consumer with the provided information
      *
@@ -44,7 +45,7 @@ class ConsumerController extends Controller
     {
         $consumer = new Consumer;
         $consumer->sponsor = Auth::user()->id;
-        
+
         return $this->validateAndSaveConsumer($request, $consumer);
     }
 
@@ -67,7 +68,7 @@ class ConsumerController extends Controller
         $consumer->physician = $request->physician;
         $consumer->bracelet = $request->bracelet;
         $consumer->diagnosis = '';
-        $consumer->contact_instructions = $request->contact_instructions;   
+        $consumer->contact_instructions = $request->contact_instructions;
         $request->session()->flash('submitted_consumer', $consumer);
     	    
         $this->validate($request, array_merge([
@@ -108,6 +109,53 @@ class ConsumerController extends Controller
         return Redirect::to('/consumer/dashboard');
     }
 
+    /**
+     * add a new contact to a consumer
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postAddContact(Request $request)
+    {
+        $contact = new Contact;
+        return $this->validateAndSaveContact($request, $contact);
+    }
+
+    /**
+     * edit an existing contact
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postEditContact(Request $request)
+    {
+        $this->validate($request, ['contact_id' => 'required|exists:contacts,id']);
+        $contact = Contact::find($request->contact_id);
+        return $this->validateAndSaveContact($request, $contact);
+    }
+
+    private function validateAndSaveContact(Request $request, Contact $contact) {
+        $contact->first_name = $request->first_name;
+        $contact->last_name = $request->last_name;
+        $contact->phone = $request->phone;
+        $contact->consumer_id = $request->consumer_id;
+
+        $this->validate($request, array_merge([
+            'consumer_id' => 'required|exists:consumers,id',
+            'first_name' => 'required|max:45',
+            'last_name' => 'required|max:45',
+            'phone' => 'max:45',
+        ], Address::rules()));
+
+        $contact->address_id = Address::retrieveOrCreate([
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip1' => $request->zip1
+        ])->id;
+        $contact->save();
+        return Redirect::to('/consumer/view/'.$contact->consumer->id);
+    }
 
     /**
      * search for consumers given various criteria
@@ -125,9 +173,31 @@ class ConsumerController extends Controller
         return Redirect::to('/consumer/list');
         return Redirect::to('/consumer/list');
     }
-    
-    
-    
+
+
+
+    /**
+     * delete the given contact from a consumer profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postDeleteContact(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|exists:contacts',
+            'consumer_id' => 'required|exists:consumers,id'
+        ]);
+        $contact = Contact::find($request->id);
+        $consumer_id = $contact->consumer->id;
+        if($consumer_id != $request->consumer_id) abort(403, 'illegal post data');
+
+        $contact->delete();
+
+        return Redirect::to('/consumer/view/'.$consumer_id);
+    }
+
+
     /**
      * delete the given consumer's profile
      *
@@ -138,8 +208,10 @@ class ConsumerController extends Controller
     {
         $this->validate($request, ['id' => 'required|exists:consumers']);
         $consumer = Consumer::find($request->id);
+        foreach($consumer->contacts as $contact)
+            $contact->delete();
         $consumer->delete();
-        
+
         return Redirect::to('/consumer/dashboard');
     }
     

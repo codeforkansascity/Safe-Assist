@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 use Session;
+use Consumer;
 
 class CheckConsumerAccess
 {	
@@ -14,16 +15,19 @@ class CheckConsumerAccess
     
     private function is_agent_viewing_searched_consumer($cid) {
     	    $consumer = Consumer::find($cid);
-    	    return Auth::user()->is_agent() and 
-    	    	!$cid->disabled and
+    	    return Auth::user()->is_agent() and
+    	    	!$consumer->disabled and
+				Session::has('consumerSearchResults') and
     	    	Session::get('consumerSearchResults') != null and
-    		Session::get('consumerSearchResults')->contains('id', $cid);
+				Session::get('consumerSearchResults')->contains('id', $cid);
     }
 
-    private function find_consumer_id($request) {	    
-    	if($request->method() == 'get')  
+    private function find_consumer_id($request) {
+    	if($request->method() == 'get' || $request->method() == 'GET')
     		return $request->segments()[count($request->segments())-1]; // get ID at the end of the request URI
-    	else 
+    	else if($request->has('consumer_id'))
+			return $request->consumer_id;
+		else
     		return $request->id;
     }
 	

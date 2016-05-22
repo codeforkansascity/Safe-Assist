@@ -12,4 +12,9 @@ class Contact extends Model
         return $this->belongsTo('App\Address');
     }
 
+    public function consumer()
+    {
+        return $this->belongsTo('App\Consumer');
+    }
+
 }
