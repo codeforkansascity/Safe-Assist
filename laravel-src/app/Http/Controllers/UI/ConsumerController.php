@@ -49,15 +49,52 @@ class ConsumerController extends Controller
     }
 
     private function validateAndSaveConsumer(Request $request, Consumer $consumer) {
-        $this->validate($request, array_merge([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'description' => 'required',
-        ], Address::rules()));
-        
         $consumer->first_name = $request->first_name;
         $consumer->last_name = $request->last_name;
-        $consumer->description = $request->description;
+        $consumer->relationship = $request->relationship;
+        $consumer->nickname = $request->nickname;
+        $consumer->suffix = $request->suffix;
+        $consumer->language = $request->language;
+        $consumer->phone = $request->phone;
+        $consumer->gender = $request->gender;
+        $consumer->dob = $request->dob;
+        $consumer->ssn = $request->ssn;
+        $consumer->height = $request->height;
+        $consumer->weight = $request->weight;
+        $consumer->eyes = $request->eyes;
+        $consumer->hair = $request->hair;
+        $consumer->marks = $request->marks;
+        $consumer->physician = $request->physician;
+        $consumer->bracelet = $request->bracelet;
+        $consumer->contact_instructions = $request->contact_instructions;   
+        $request->session()->flash('submitted_consumer', $consumer);
+    	    
+        $this->validate($request, array_merge([
+            'first_name' => 'required|max:45',
+            'last_name' => 'required|max:45',
+            'relationship' => 'required|in:'.
+            	implode(',', array_keys($consumer->relationship_options)),
+            'nickname' => 'max:45',
+            'suffix' => 'max:45',
+            'language' => 'required|in:'.
+            	implode(',', array_keys($consumer->language_options)),
+            'phone' => 'max:45',
+            'gender' => 'in:'.
+            	implode(',', array_keys($consumer->gender_options)),
+            'dob' => 'required|date',
+            '' => 'max:45',
+            'height' => 'required|integer',
+            'weight' => 'required|integer',
+            'eyes' => 'required|in:'.
+            	implode(',', array_keys($consumer->eye_color_options)),
+            'hair' => 'required|in:'.
+            	implode(',', array_keys($consumer->hair_color_options)),
+            'marks' => '',
+            'physician' => '',
+            'bracelet' => 'max:100',
+            'contact_instructions' => '',
+        ], Address::rules()));
+        
 
         $consumer->address_id = Address::retrieveOrCreate([
         	'street' => $request->street,

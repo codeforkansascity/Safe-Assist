@@ -42,7 +42,8 @@ Route::get('/consumer/view/{id}', ['middleware' => ['auth', 'consumerAccess:view
 Route::get('/consumer/edit/{id}', ['middleware' => ['auth', 'consumerAccess:edit'], 
 	function ($id) { return view('ui.consumer_profile_edit', ['consumer' => App\Consumer::find($id)]); }]);
 Route::get('/consumer/register', ['middleware' => ['auth', 'consumerAccess:create'],
-	function () { return view('ui.consumer_profile_edit', ['consumer' => new App\Consumer ]); }]);
+	function () { return view('ui.consumer_profile_edit', ['consumer' => 
+		Session::has('submitted_consumer') ? Session::get('submitted_consumer') : new App\Consumer ]); }]);
 Route::get('/consumer/list', ['middleware' => 'auth', 
 	function () { return view('ui.consumer_search_list'); }]);
 
