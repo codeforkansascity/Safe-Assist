@@ -191,6 +191,11 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Address'   => App\Address::class,
+        'Agency'   => App\Agency::class,
+        'Consumer'   => App\Consumer::class,
+        'Contact'   => App\Contact::class,
+        'User'   => App\User::class,
 
     ],
 

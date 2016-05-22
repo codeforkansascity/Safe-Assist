@@ -66,6 +66,7 @@ class ConsumerController extends Controller
         $consumer->marks = $request->marks;
         $consumer->physician = $request->physician;
         $consumer->bracelet = $request->bracelet;
+        $consumer->diagnosis = '';
         $consumer->contact_instructions = $request->contact_instructions;   
         $request->session()->flash('submitted_consumer', $consumer);
     	    
@@ -73,22 +74,22 @@ class ConsumerController extends Controller
             'first_name' => 'required|max:45',
             'last_name' => 'required|max:45',
             'relationship' => 'required|in:'.
-            	implode(',', array_keys($consumer->relationship_options)),
+            	implode(',', array_keys(Consumer::$relationship_options)),
             'nickname' => 'max:45',
             'suffix' => 'max:45',
             'language' => 'required|in:'.
-            	implode(',', array_keys($consumer->language_options)),
+            	implode(',', array_keys(Consumer::$language_options)),
             'phone' => 'max:45',
             'gender' => 'in:'.
-            	implode(',', array_keys($consumer->gender_options)),
+            	implode(',', array_keys(Consumer::$gender_options)),
             'dob' => 'required|date',
             '' => 'max:45',
             'height' => 'required|integer',
             'weight' => 'required|integer',
             'eyes' => 'required|in:'.
-            	implode(',', array_keys($consumer->eye_color_options)),
+            	implode(',', array_keys(Consumer::$eye_color_options)),
             'hair' => 'required|in:'.
-            	implode(',', array_keys($consumer->hair_color_options)),
+            	implode(',', array_keys(Consumer::$hair_color_options)),
             'marks' => '',
             'physician' => '',
             'bracelet' => 'max:100',

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
                 
 class Consumer extends Model
 {
-    public $relationship_options = [
+    public static $relationship_options = [
 			'self' => 'Self',
 			'parent' => 'Parent',
 			'guardian' => 'Guardian',
@@ -16,18 +16,18 @@ class Consumer extends Model
 			'other' => 'Other'
     ];
     
-    public $language_options = [
+    public static $language_options = [
 			'english' => 'English',
 			'spanish' => 'Spanish',
 			'other' => 'Other'
     ];
     
-    public $gender_options = [
+    public static $gender_options = [
 			'M' => 'Male',
 			'F' => 'Female'
     ];
 	
-    public $eye_color_options = [
+    public static $eye_color_options = [
 			'brown' => 'Brown',
 			'hazel' => 'Hazel',
 			'blue' => 'Blue',
@@ -36,7 +36,7 @@ class Consumer extends Model
 			'amber' => 'Amber'
     ];
     
-    public $hair_color_options = [
+    public static $hair_color_options = [
 			'brown' => 'Brown',
 			'black' => 'Black',
 			'blonde' => 'Blonde',

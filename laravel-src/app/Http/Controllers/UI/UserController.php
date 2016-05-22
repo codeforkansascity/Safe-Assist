@@ -57,14 +57,19 @@ class UserController extends Controller
         $this->validate($request, ['id' => 'required|exists:users']);
         $user = User::find($request->id);
         $user->email = $request->email;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->phone = $request->phone;
+        $request->session()->flash('submitted_user', $user);
         
         $this->validate($request, array_merge([
             'id' => 'required|exists:users',
+            'first_name' => 'required:max:45',
+            'last_name' => 'required:max:45',
+            'phone' => 'required:max:45',
             'email' => 'email|max:255'.($user->isDirty('email')?'|unique:users,email':''),
         ], Address::rules()));
-        
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
+
 
         $user->address_id = Address::retrieveOrCreate([
         	'street' => $request->street,

@@ -6,8 +6,6 @@ Route::get('/about',  function () { return view('about'); });
 Route::get('/contact',  function () { return view('contact'); });
 Route::get('/partners',  function () { return view('partners'); });
 Route::get('/', ['as' => 'welcome', function () { return view('welcome'); }]);
-Route::post('/user/login', 'Auth\AuthController@postLogin');
-Route::post('/user/register', 'Auth\AuthController@postRegister');
 
 // gated routes
 Route::get('/user/view/{id}', ['middleware' => 'auth', 
@@ -20,6 +18,8 @@ Route::get('/user/edit/{id}', ['middleware' => 'auth',
 	function ($id) { return view('ui.user_profile_edit', ['user' => App\User::find($id)]); }]);
 Route::get('/user/logout', 'Auth\AuthController@getLogout');
 
+Route::post('/user/login', 'Auth\AuthController@postLogin');
+Route::post('/user/register', 'Auth\AuthController@postRegister');
 Route::post('/user/update', 'UI\UserController@postUpdate');
 Route::post('/user/delete', ['middleware' => ['auth', 'role:administrator'],
 	                     'uses' => 'UI\UserController@postDelete']);

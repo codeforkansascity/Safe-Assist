@@ -1,2 +1,2 @@
-@include('model.form.textfield', ['name' => 'name', 'description' => 'Agency Name', 'value' => $agency->name])
-@include('model.form.address', ['address' => $agency->address ? $agency->address : new App\Address])
+@include('model.form.textfield', ['name' => 'name', 'description' => 'Agency Name', 'value' => $agency ? $agency->name : NULL])
+@include('model.form.address', ['address' => $agency && $agency->address ? $agency->address : NULL])
