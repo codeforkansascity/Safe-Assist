@@ -49,8 +49,34 @@ class Consumer extends Model
     {
         return $this->belongsTo('App\Consumer', 'sponsor');
     }
-        
-    public function address()
+
+	public function medications() {
+		return $this->belongsToMany('App\Medication');
+	}
+
+	public function conditions() {
+		return $this->belongsToMany('App\Condition');
+	}
+
+	public function impairments() {
+		return $this->belongsToMany('App\Impairment');
+	}
+
+	public function devices() {
+		return $this->belongsToMany('App\Device');
+	}
+
+	public function employer()
+	{
+		return $this->belongsTo('App\Employer');
+	}
+
+	public function school()
+	{
+		return $this->belongsTo('App\School');
+	}
+
+	public function address()
     {
         return $this->belongsTo('App\Address');
     }
