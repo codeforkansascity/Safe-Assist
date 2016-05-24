@@ -41,7 +41,7 @@
 	<h2>Employer</h2>
 	@if($consumer->employer)
 		@include('model.employer', ['consumer' => $consumer, 'employer' => $consumer->employer])
-		<a class="button" href="/employer/edit/{{ $consumer->school->id }}/{{ $consumer->id }}">Edit</a>
+		<a class="button" href="/employer/edit/{{ $consumer->employer->id }}/{{ $consumer->id }}">Edit</a>
 		<form action="/employer/release" method="POST">
 			{!! csrf_field() !!}
 			<input type="hidden" name="id" value="{{$consumer->id}}"/>

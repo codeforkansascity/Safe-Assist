@@ -225,15 +225,63 @@ class ConsumerController extends Controller
         $school->save();
     }
 
-    private function validateAndSaveEmployer(Request $request, Employer $employer) {
-        $employer->name = $request->first_name;
-        $employer->phone = $request->phone;
 
+
+    public function postAddEmployer(Request $request)
+    {
+        $employer = new employer;
+        $this->validateAndSaveemployer($request, $employer);
+        if($request->has('consumer_id')) {
+            $this->validate($request, array_merge([
+                'consumer_id' => 'required|exists:consumers,id']));
+            $consumer = Consumer::find($request->consumer_id);
+            $consumer->employer_id = $employer->id;
+            $consumer->employer_position = $request->position;
+            $consumer->employer_contact = $request->contact;
+            $consumer->save();
+            return Redirect::to('/consumer/view/'.$consumer->id);
+        }
+        return Redirect::to('/'); // TODO: this is currently only used with consumers, so this redirect is a placeholder
+    }
+
+    public function postEditEmployer(Request $request)
+    {
+        $this->validate($request, array_merge([
+            'id' => 'required|exists:employers']));
+        $employer = employer::find($request->id);
+        $this->validateAndSaveemployer($request, $employer);
+        if($request->has('consumer_id')) {
+            $this->validate($request, array_merge([
+                'consumer_id' => 'required|exists:consumers,id']));
+            $consumer = Consumer::find($request->consumer_id);
+            $consumer->employer_id = $employer->id;
+            $consumer->employer_position = $request->position;
+            $consumer->employer_contact = $request->contact;
+            $consumer->save();
+            return Redirect::to('/consumer/view/'.$consumer->id);
+        }
+        return Redirect::to('/'); // TODO: this is currently only used with consumers, so this redirect is a placeholder
+    }
+
+    public function postReleaseEmployer(Request $request)
+    {
+        $this->validate($request, array_merge([
+            'id' => 'required|exists:consumers']));
+        $consumer = Consumer::find($request->id);
+        $consumer->employer_id = NULL;
+        $consumer->employer_contact = NULL;
+        $consumer->employer_position = NULL;
+        $consumer->save();
+        return Redirect::to('/consumer/view/'.$consumer->id);
+    }
+
+    private function validateAndSaveEmployer(Request $request, employer $employer) {
         $this->validate($request, array_merge([
             'name' => 'required|max:45',
             'phone' => 'max:45',
         ], Address::rules()));
-
+        $employer->name = $request->name;
+        $employer->phone = $request->phone;
         $employer->address_id = Address::retrieveOrCreate([
             'street' => $request->street,
             'city' => $request->city,

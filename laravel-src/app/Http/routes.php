@@ -52,12 +52,14 @@ Route::get('/contact/add/{consumer_id}', ['middleware' => ['auth', 'consumerAcce
 Route::get('/contact/edit/{contact_id}/{consumer_id}', ['middleware' => ['auth', 'consumerAccess:edit'],
 	function ($contact_id, $consumer_id) { return view('ui.contact_profile_edit',
 		['contact' => App\Contact::find($contact_id), 'consumer_id' => $consumer_id]); }]);
+
 Route::get('/school/add/{consumer_id}', ['middleware' => ['auth', 'consumerAccess:edit'],
 	function ($consumer_id) { return view('ui.school_profile_edit',
 		['school' => NULL, 'consumer_id' => $consumer_id]); }]);
 Route::get('/school/edit/{school_id}/{consumer_id}', ['middleware' => ['auth', 'consumerAccess:edit'],
 	function ($school_id, $consumer_id) { return view('ui.school_profile_edit',
 		['school' => App\school::find($school_id), 'consumer_id' => $consumer_id]); }]);
+
 Route::get('/employer/add/{consumer_id}', ['middleware' => ['auth', 'consumerAccess:edit'],
 	function ($consumer_id) { return view('ui.employer_profile_edit',
 		['employer' => NULL, 'consumer_id' => $consumer_id]); }]);
@@ -91,6 +93,14 @@ Route::post('/school/update', ['middleware' => ['auth', 'consumerAccess:edit'],
 	'uses' => 'UI\ConsumerController@postEditSchool']);
 Route::post('/school/release', ['middleware' => ['auth', 'consumerAccess:edit'],
 	'uses' => 'UI\ConsumerController@postReleaseSchool']);
+
+
+Route::post('/employer/add', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postAddEmployer']);
+Route::post('/employer/update', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postEditEmployer']);
+Route::post('/employer/release', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postReleaseEmployer']);
 
 Route::get('/admin',  ['middleware' => ['auth', 'role:administrator'],
 	function () { return view('ui.administrator_ui'); }]);
