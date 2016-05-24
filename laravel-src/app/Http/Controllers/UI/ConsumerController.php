@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\UI;
 
+use App\Impairment;
 use App\User;
 use App\Consumer;
 use App\Contact;
@@ -103,7 +104,9 @@ class ConsumerController extends Controller
     		'state' => $request->state,
     		'zip1' => $request->zip1
     	])->id;
-        	
+
+        $consumer->impairments()->sync($request->has('impairments') ? $request->impairments : array());
+
         $consumer->save();
         return Redirect::to('/consumer/dashboard');
     }

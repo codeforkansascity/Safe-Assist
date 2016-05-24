@@ -42,7 +42,7 @@
 	@include('model.form.textfield', ['name' => 'physician', 'description' => 'Primary Physician',
 		'rows' => 4, 'cols' => 50, 'value' => $consumer ? $consumer->physician : NULL])
 
-	@include('model.form.dropdown', ['name' => 'impairments', 'description' => 'Impairments',
+	@include('model.form.dropdown', ['name' => 'impairments[]', 'description' => 'Impairments',
     	'values' => $consumer->get_impairment_keys(),
     	'options' => Impairment::get_all_options()
 	])
