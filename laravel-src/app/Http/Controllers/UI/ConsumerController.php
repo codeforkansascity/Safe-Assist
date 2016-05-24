@@ -7,6 +7,8 @@ use App\User;
 use App\Consumer;
 use App\Contact;
 use App\Address;
+use App\School;
+use App\Employer;
 use Validator;
 use Session;
 use App\Http\Controllers\Controller;
@@ -160,6 +162,85 @@ class ConsumerController extends Controller
         ])->id;
         $contact->save();
         return Redirect::to('/consumer/view/'.$contact->consumer->id);
+    }
+
+    public function postAddSchool(Request $request)
+    {
+        $school = new School;
+        $this->validateAndSaveSchool($request, $school);
+        if($request->has('consumer_id')) {
+            $this->validate($request, array_merge([
+                'consumer_id' => 'required|exists:consumers,id']));
+            $consumer = Consumer::find($request->consumer_id);
+            $consumer->school_id = $school->id;
+            $consumer->school_contact = $request->contact;
+            $consumer->save();
+            return Redirect::to('/consumer/view/'.$consumer->id);
+        }
+        return Redirect::to('/'); // TODO: this is currently only used with consumers, so this redirect is a placeholder
+    }
+
+    public function postEditSchool(Request $request)
+    {
+        $this->validate($request, array_merge([
+            'id' => 'required|exists:schools']));
+        $school = School::find($request->id);
+        $this->validateAndSaveSchool($request, $school);
+        if($request->has('consumer_id')) {
+            $this->validate($request, array_merge([
+                'consumer_id' => 'required|exists:consumers,id']));
+            $consumer = Consumer::find($request->consumer_id);
+            $consumer->school_id = $school->id;
+            $consumer->school_contact = $request->contact;
+            $consumer->save();
+            return Redirect::to('/consumer/view/'.$consumer->id);
+        }
+        return Redirect::to('/'); // TODO: this is currently only used with consumers, so this redirect is a placeholder
+    }
+
+    public function postReleaseSchool(Request $request)
+    {
+        $this->validate($request, array_merge([
+            'id' => 'required|exists:consumers']));
+        $consumer = Consumer::find($request->id);
+        $consumer->school_id = NULL;
+        $consumer->school_contact = NULL;
+        $consumer->save();
+        return Redirect::to('/consumer/view/'.$consumer->id);
+    }
+
+    private function validateAndSaveSchool(Request $request, School $school) {
+        $this->validate($request, array_merge([
+            'name' => 'required|max:45',
+            'phone' => 'max:45',
+        ], Address::rules()));
+        $school->name = $request->name;
+        $school->phone = $request->phone;
+        $school->address_id = Address::retrieveOrCreate([
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip1' => $request->zip1
+        ])->id;
+        $school->save();
+    }
+
+    private function validateAndSaveEmployer(Request $request, Employer $employer) {
+        $employer->name = $request->first_name;
+        $employer->phone = $request->phone;
+
+        $this->validate($request, array_merge([
+            'name' => 'required|max:45',
+            'phone' => 'max:45',
+        ], Address::rules()));
+
+        $employer->address_id = Address::retrieveOrCreate([
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip1' => $request->zip1
+        ])->id;
+        $employer->save();
     }
 
     /**

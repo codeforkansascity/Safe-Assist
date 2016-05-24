@@ -6,8 +6,8 @@
 		<a href="/consumer/edit/{{$consumer->id}}" class="button special">Edit Consumer</a>
 	@endif
 
+	<h2>Contacts</h2>
 	@if($consumer->contacts)
-		<h2>Contacts</h2>
 		@foreach($consumer->contacts as $contact)
 			@include('model.contact', ['contact' => $contact])
 			@if (Auth::user()->consumers->contains($consumer))
@@ -21,10 +21,36 @@
 			@endif
 		@endforeach
 	@endif
-
 	@if (Auth::user()->consumers->contains($consumer))
-	<a class="button" href="/contact/add/{{ $consumer->id }}">Add Contact</a>
+		<a class="button" href="/contact/add/{{ $consumer->id }}">Add Contact</a>
 	@endif
+
+	<h2>School</h2>
+	@if($consumer->school)
+		@include('model.school', ['consumer' => $consumer, 'school' => $consumer->school])
+		<a class="button" href="/school/edit/{{ $consumer->school->id }}/{{ $consumer->id }}">Edit</a>
+		<form action="/school/release" method="POST">
+			{!! csrf_field() !!}
+			<input type="hidden" name="id" value="{{$consumer->id}}"/>
+			<input type="submit" value="Remove" class="button special">
+		</form>
+	@else
+		<a class="button" href="/school/add/{{ $consumer->id }}">Add School</a>
+	@endif
+
+	<h2>Employer</h2>
+	@if($consumer->employer)
+		@include('model.employer', ['consumer' => $consumer, 'employer' => $consumer->employer])
+		<a class="button" href="/employer/edit/{{ $consumer->school->id }}/{{ $consumer->id }}">Edit</a>
+		<form action="/employer/release" method="POST">
+			{!! csrf_field() !!}
+			<input type="hidden" name="id" value="{{$consumer->id}}"/>
+			<input type="submit" value="Remove" class="button special">
+		</form>
+	@else
+		<a class="button" href="/employer/add/{{ $consumer->id }}">Add Employer</a>
+	@endif
+
 
 	@if (Auth::user()->consumers->contains($consumer))
 		<form action="/consumer/delete" method="POST">
