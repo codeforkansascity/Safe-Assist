@@ -105,9 +105,12 @@ class ConsumerController extends Controller
     		'zip1' => $request->zip1
     	])->id;
 
-        $consumer->impairments()->sync($request->has('impairments') ? $request->impairments : array());
 
         $consumer->save();
+        $consumer->impairments()->sync($request->has('impairments') ? $request->impairments : array());
+        $consumer->devices()->sync($request->has('devices') ? $request->devices : array());
+        $consumer->conditions()->sync($request->has('conditions') ? $request->conditions : array());
+        //$consumer->medications()->sync($request->has('medications') ? $request->medications : array());
         return Redirect::to('/consumer/dashboard');
     }
 

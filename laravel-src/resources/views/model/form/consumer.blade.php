@@ -42,11 +42,27 @@
 	@include('model.form.textfield', ['name' => 'physician', 'description' => 'Primary Physician',
 		'rows' => 4, 'cols' => 50, 'value' => $consumer ? $consumer->physician : NULL])
 
-	@include('model.form.dropdown', ['name' => 'impairments[]', 'description' => 'Impairments',
+	@include('model.form.dropdown', ['name' => 'impairments', 'description' => 'Impairments',
     	'values' => $consumer->get_impairment_keys(),
     	'options' => Impairment::get_all_options()
 	])
 
+	@include('model.form.dropdown', ['name' => 'devices', 'description' => 'Equipment',
+    	'values' => $consumer->get_device_keys(),
+    	'options' => Device::get_all_options()
+	])
+
+    @include('model.form.dropdown', ['name' => 'conditions', 'description' => 'Conditions',
+        'values' => $consumer->get_condition_keys(),
+        'options' => Condition::get_all_options()
+    ])
+	{{--
+    TODO: make this a form you can add medications through
+        @include('model.form.dropdown', ['name' => 'medications', 'description' => 'Medications',
+            'values' => $consumer->get_medication_keys(),
+            'options' => Medication::get_all_options()
+        ])
+    --}}
 	@include('model.form.textfield', ['name' => 'contact_instructions', 'description' => 'Contact Instructions',
 		'rows' => 4, 'cols' => 50, 'value' =>  $consumer ? $consumer->contact_instructions : NULL])
 	@include('model.form.textfield', ['name' => 'bracelet', 'description' => 'Medical ID Bracelet',

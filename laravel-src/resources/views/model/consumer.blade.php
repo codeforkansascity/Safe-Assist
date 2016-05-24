@@ -34,6 +34,12 @@
 		'value' => $consumer ? $consumer->physician : NULL])
 	@include('model.field_list', ['name' => 'impairments', 'description' => 'Impairments',
 		'values' => $consumer ? $consumer->get_impairment_names() : array()])
+	@include('model.field_list', ['name' => 'devices', 'description' => 'Equipment',
+		'values' => $consumer ? $consumer->get_device_names() : array()])
+	@include('model.field_list', ['name' => 'conditions', 'description' => 'Conditions',
+		'values' => $consumer ? $consumer->get_condition_names() : array()])
+	@include('model.field_list', ['name' => 'medications', 'description' => 'Medications',
+		'values' => $consumer ? $consumer->get_medication_names() : array()])
 	@include('model.field_row', ['name' => 'contact_instructions', 'description' => 'Contact Instructions',
 		'value' => $consumer ? $consumer->contact_instructions : NULL])
 	@include('model.field_row', ['name' => 'bracelet', 'description' => 'Medical ID Bracelet',

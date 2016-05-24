@@ -54,9 +54,41 @@ class Consumer extends Model
 		return $this->belongsToMany('App\Medication');
 	}
 
+	public function get_medication_keys() {
+		$keys = array();
+		foreach($this->medications as $medication)
+			$keys[] = $medication->id;
+		return $keys;
+	}
+
+	public function get_medication_names() {
+		$values = array();
+		foreach($this->medications as $medication)
+			$values[] = $medication->name;
+		return $values;
+	}
+
+
+
 	public function conditions() {
 		return $this->belongsToMany('App\Condition');
 	}
+
+	public function get_condition_keys() {
+		$keys = array();
+		foreach($this->conditions as $condition)
+			$keys[] = $condition->id;
+		return $keys;
+	}
+
+	public function get_condition_names() {
+		$values = array();
+		foreach($this->conditions as $condition)
+			$values[] = $condition->name;
+		return $values;
+	}
+
+
 
 	public function impairments() {
 		return $this->belongsToMany('App\Impairment');
@@ -76,8 +108,23 @@ class Consumer extends Model
 		return $values;
 	}
 
+
+
 	public function devices() {
 		return $this->belongsToMany('App\Device');
+	}
+	public function get_device_keys() {
+		$keys = array();
+		foreach($this->devices as $device)
+			$keys[] = $device->id;
+		return $keys;
+	}
+
+	public function get_device_names() {
+		$values = array();
+		foreach($this->devices as $device)
+			$values[] = $device->name;
+		return $values;
 	}
 
 	public function employer()
