@@ -32,6 +32,8 @@
 		'value' => $consumer ? $consumer->marks : NULL])
 	@include('model.field_row', ['name' => 'physician', 'description' => 'Primary Physician', 'rows' => 4, 'cols' => 50,
 		'value' => $consumer ? $consumer->physician : NULL])
+	@include('model.field_list', ['name' => 'impairments', 'description' => 'Impairments',
+		'values' => $consumer ? $consumer->get_impairment_names() : array()])
 	@include('model.field_row', ['name' => 'contact_instructions', 'description' => 'Contact Instructions',
 		'value' => $consumer ? $consumer->contact_instructions : NULL])
 	@include('model.field_row', ['name' => 'bracelet', 'description' => 'Medical ID Bracelet',

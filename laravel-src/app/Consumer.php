@@ -69,6 +69,13 @@ class Consumer extends Model
 		return $keys;
 	}
 
+	public function get_impairment_names() {
+		$values = array();
+		foreach($this->impairments as $impairment)
+			$values[] = $impairment->name;
+		return $values;
+	}
+
 	public function devices() {
 		return $this->belongsToMany('App\Device');
 	}
