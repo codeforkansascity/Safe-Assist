@@ -62,6 +62,13 @@ class Consumer extends Model
 		return $this->belongsToMany('App\Impairment');
 	}
 
+	public function get_impairment_keys() {
+		$keys = array();
+		foreach($this->impairments as $impairment)
+			$keys[] = $impairment->id;
+		return $keys;
+	}
+
 	public function devices() {
 		return $this->belongsToMany('App\Device');
 	}

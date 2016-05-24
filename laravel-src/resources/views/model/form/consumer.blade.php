@@ -41,6 +41,12 @@
 		'rows' => 4, 'cols' => 50, 'value' => $consumer ? $consumer->marks : NULL])
 	@include('model.form.textfield', ['name' => 'physician', 'description' => 'Primary Physician',
 		'rows' => 4, 'cols' => 50, 'value' => $consumer ? $consumer->physician : NULL])
+
+	@include('model.form.dropdown', ['name' => 'impairments', 'description' => 'Impairments',
+    	'values' => $consumer->get_impairment_keys(),
+    	'options' => Impairment::get_all_options()
+	])
+
 	@include('model.form.textfield', ['name' => 'contact_instructions', 'description' => 'Contact Instructions',
 		'rows' => 4, 'cols' => 50, 'value' =>  $consumer ? $consumer->contact_instructions : NULL])
 	@include('model.form.textfield', ['name' => 'bracelet', 'description' => 'Medical ID Bracelet',
