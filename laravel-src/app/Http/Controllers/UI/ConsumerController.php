@@ -67,7 +67,6 @@ class ConsumerController extends Controller
         $consumer->marks = $request->marks;
         $consumer->physician = $request->physician;
         $consumer->bracelet = $request->bracelet;
-        $consumer->diagnosis = '';
         $consumer->contact_instructions = $request->contact_instructions;
         $request->session()->flash('submitted_consumer', $consumer);
     	    
