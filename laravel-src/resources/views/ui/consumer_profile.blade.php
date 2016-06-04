@@ -1,6 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
+
+	<form action="/consumer/replace_image" method="POST" enctype="multipart/form-data">
+		{!! csrf_field() !!}
+		<input type="file" name="image" />
+		<input type="hidden" name="id" value="{{$consumer->id}}"/>
+		<input type="submit" value="Change Image" class="button special">
+	</form>
+
 	@include('model.consumer', ['consumer' => $consumer])
 	@if (Auth::user()->administrator || Auth::user()->consumers->contains($consumer))
 		<a href="/consumer/edit/{{$consumer->id}}" class="button special">Edit Consumer</a>

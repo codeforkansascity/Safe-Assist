@@ -67,6 +67,11 @@ Route::get('/employer/edit/{employer_id}/{consumer_id}', ['middleware' => ['auth
 	function ($employer_id, $consumer_id) { return view('ui.employer_profile_edit',
 		['employer' => App\employer::find($employer_id), 'consumer_id' => $consumer_id]); }]);
 
+Route::get('/consumer/image/{id}', ['middleware' => ['auth', 'consumerAccess:view'],
+	'uses' => 'UI\ConsumerController@getProfileImage']);
+
+Route::post('/consumer/replace_image', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postProfileImage']);
 Route::post('/consumer/search', ['middleware' => ['auth', 'role:agent'], 
 	                         'uses' => 'UI\ConsumerController@postSearch']);
 Route::post('/consumer/update', ['middleware' => ['auth', 'consumerAccess:edit'],

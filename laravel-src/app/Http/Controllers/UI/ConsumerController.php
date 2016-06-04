@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ConsumerController extends Controller
 {
@@ -330,7 +331,6 @@ class ConsumerController extends Controller
         ->get();
         Session::put('consumerSearchResults', $consumers);
         return Redirect::to('/consumer/list');
-        return Redirect::to('/consumer/list');
     }
 
 
@@ -390,7 +390,7 @@ class ConsumerController extends Controller
         
         return Redirect::to('/consumer/dashboard');
     }
-    
+
     /**
      * enable the given consumer's profile
      *
@@ -403,7 +403,43 @@ class ConsumerController extends Controller
         $consumer = Consumer::find($request->id);
         $consumer->disabled = 0;
         $consumer->save();
-        
+
         return Redirect::to('/consumer/dashboard');
+    }
+
+
+    /**
+     * enable the given consumer's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postProfileImage(Request $request)
+    {
+        $this->validate($request, ['id' => 'required|exists:consumers']);
+        $consumer = Consumer::find($request->id);
+        $consumer->image = base64_encode(file_get_contents($request->file('image')->getRealPath()));
+        $consumer->save();
+
+        return Redirect::to('/consumer/view/'.$consumer->id);
+    }
+
+
+    /**
+     * enable the given consumer's profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getProfileImage(Request $request)
+    {
+        $cid = $request->segments()[count($request->segments())-1];
+        $consumer = Consumer::find($cid);
+        $temp_file = tempnam(sys_get_temp_dir(), 'profileimg');
+        file_put_contents($temp_file, base64_decode($consumer->image));
+
+        $response = new BinaryFileResponse($temp_file);
+        $response->headers->set('Content-Disposition', 'inline; filename="profile.png"');
+        return $response;
     }
 }

@@ -1,4 +1,7 @@
 <section class="consumer_profile {{$consumer->disabled ? 'disabled_consumer_profile' : ''}}">
+	<div class="profile_image">
+		<img class="img_responsive" src="{{$consumer && $consumer->image ? '/consumer/image/'.$consumer->id : '/images/blank-profile-img.png'}}"/>
+	</div>
 	@include('model.field_row', ['name' => 'relationship', 'description' => 'Relationship to Caretaker',
 		'value' => $consumer ? $consumer->relationship_options[$consumer->relationship] : NULL])
 	@include('model.field_row', ['name' => 'first_name', 'description' => 'First Name',
