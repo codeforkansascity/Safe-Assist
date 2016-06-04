@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UI;
 
 use App\Impairment;
+use App\Medication;
 use App\User;
 use App\Consumer;
 use App\Contact;
@@ -112,8 +113,32 @@ class ConsumerController extends Controller
         $consumer->impairments()->sync($request->has('impairments') ? $request->impairments : array());
         $consumer->devices()->sync($request->has('devices') ? $request->devices : array());
         $consumer->conditions()->sync($request->has('conditions') ? $request->conditions : array());
+        $consumer->medications()->sync($request->has('medications') ? $request->medications : array());
         //$consumer->medications()->sync($request->has('medications') ? $request->medications : array());
         return Redirect::to('/consumer/dashboard');
+    }
+
+
+    /**
+     * add a new medication to a consumer
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postAddMedication(Request $request)
+    {
+        $consumer = Consumer::find($request->id);
+        $medications = Medication::where('name', 'LIKE', "%$request->name%")->get();
+        if (!$medications->isEmpty()){
+            $medication = $medications->first();
+        } else {
+            $medication = new Medication();
+            $medication->name = $request->name;
+            $medication->save();
+        }
+        if(!$consumer->medications->contains($medication->id))
+            $consumer->medications()->save($medication);
+        return Redirect::to('/consumer/view/'.$consumer->id);
     }
 
     /**
@@ -307,6 +332,7 @@ class ConsumerController extends Controller
         return Redirect::to('/consumer/list');
         return Redirect::to('/consumer/list');
     }
+
 
 
 

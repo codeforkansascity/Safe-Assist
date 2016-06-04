@@ -68,6 +68,13 @@ class Consumer extends Model
 		return $values;
 	}
 
+	public function get_medication_options() {
+		$values = array();
+		foreach($this->medications as $medication)
+			$values[$medication->id] = $medication->name;
+		return $values;
+	}
+
 
 
 	public function conditions() {

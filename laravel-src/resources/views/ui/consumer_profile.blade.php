@@ -6,6 +6,15 @@
 		<a href="/consumer/edit/{{$consumer->id}}" class="button special">Edit Consumer</a>
 	@endif
 
+	<h2>Medications</h2>
+	<form action="/medicaiton/add" method="POST">
+		{!! csrf_field() !!}
+		@include('model.form.textfield', ['name' => 'name', 'description' => 'Medication Name',
+               'rows' => 4, 'cols' => 50, 'value' =>  NULL])
+		<input type="hidden" name="id" value="{{$consumer->id}}"/>
+		<input type="submit" value="Add Medication" class="button special">
+	</form>
+
 	<h2>Contacts</h2>
 	@if($consumer->contacts)
 		@foreach($consumer->contacts as $contact)

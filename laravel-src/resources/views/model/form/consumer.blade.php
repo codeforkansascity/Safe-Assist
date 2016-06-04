@@ -56,13 +56,10 @@
         'values' => $consumer->get_condition_keys(),
         'options' => Condition::get_all_options()
     ])
-	{{--
-    TODO: make this a form you can add medications through
-        @include('model.form.dropdown', ['name' => 'medications', 'description' => 'Medications',
-            'values' => $consumer->get_medication_keys(),
-            'options' => Medication::get_all_options()
-        ])
-    --}}
+	@include('model.form.dropdown', ['name' => 'medications', 'description' => 'Medications',
+        'values' => $consumer->get_medication_keys(),
+        'options' => $consumer->get_medication_options()
+    ])
 	@include('model.form.textfield', ['name' => 'contact_instructions', 'description' => 'Contact Instructions',
 		'rows' => 4, 'cols' => 50, 'value' =>  $consumer ? $consumer->contact_instructions : NULL])
 	@include('model.form.textfield', ['name' => 'bracelet', 'description' => 'Medical ID Bracelet',

@@ -95,6 +95,8 @@ Route::post('/school/release', ['middleware' => ['auth', 'consumerAccess:edit'],
 	'uses' => 'UI\ConsumerController@postReleaseSchool']);
 
 
+Route::post('/medicaiton/add', ['middleware' => ['auth', 'consumerAccess:edit'],
+	'uses' => 'UI\ConsumerController@postAddMedication']);
 Route::post('/employer/add', ['middleware' => ['auth', 'consumerAccess:edit'],
 	'uses' => 'UI\ConsumerController@postAddEmployer']);
 Route::post('/employer/update', ['middleware' => ['auth', 'consumerAccess:edit'],
