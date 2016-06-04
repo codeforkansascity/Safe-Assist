@@ -1,29 +1,31 @@
 <section id="one" class="wrapper style1">
-	<div class="header"><div class="major">
+	<div class="header"><div class="major text-center">
 	<h2>Benefits for the Whole Community</h2>
+</div>
 	<div class="container">
 		<div class="row">
-			<div class="4u">
+			<div class="col-xs-12 col-sm-4">
 				<section class="special box">
-					<i class="icon fa-heart major"></i>
+					<i class="glyphicon glyphicon-heart"></i>
 					<h3>Caregivers</h3>
-					<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+					<p>Individuals or agencies who provide care for individuals with special needs.  Click here for more information.</p>
 				</section>
 			</div>
-			<div class="4u">
+			<div class="col-xs-12 col-sm-4">
 				<section class="special box">
-					<i class="icon fa-group major"></i>
+					<i class="glyphicon glyphicon-home"></i>
 					<h3>Community</h3>
-					<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+					<p>Safe Assist bridges the relationships between all individuals and the Kansas City Police Department.</p>
 				</section>
 			</div>
-			<div class="4u">
+			<div class="col-xs-12 col-sm-4">
 				<section class="special box">
-					<i class="icon fa-plus major"></i>
+					<i class="glyphicon glyphicon-plus"></i>
 					<h3>First Responders</h3>
-					<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+					<p>Kansas City Police Department are the first responders to calls for help.</p>
 				</section>
 			</div>
-		</div>
 	</div>
+
+</div>
 </section>

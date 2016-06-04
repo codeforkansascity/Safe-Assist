@@ -5,13 +5,17 @@
 		@if (Auth::check()) 
 			<p>Welcome, {!! Auth::user()->email !!}</p> 
 		@endif
-		<ul class="actions">
+
 		@if (!Auth::check()) 
-			<li><a id="enroll_button" class="button big special">Enroll</a></li>
+			<a id="enroll_button" class="btn btn-primary btn-lg">Enroll</a>
 		@else 
-			<li><a href="caregiver" class="button big special">Caregiver Menu</a></li>
+			<a href="caregiver" class="btn btn-danger btn-lg">Caregiver Menu</a>
 		@endif
-			<li><a href="#elements" class="button big alt">Learn More</a></li>
-		</ul>
+			<a href="#elements" class="btn btn-primary btn-lg">Learn More</a>
 	</div>
 </section>
+
+
+
+
+
