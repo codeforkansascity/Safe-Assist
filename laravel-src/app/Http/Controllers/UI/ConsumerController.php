@@ -324,10 +324,12 @@ class ConsumerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function postSearch(Request $request) {
-        $consumers = Consumer::where('consumers.disabled', '=', 0)  // consumer profile is not hidden (disabled)
+        $consumers = Consumer::select('consumers.*')->where('consumers.disabled', '=', 0)  // consumer profile is not hidden (disabled)
         ->join('users', 'consumers.sponsor', '=', 'users.id')
         ->where('users.disabled', '=', 0)
-        ->where('description', 'LIKE', "%$request->keyword%") // match query criteria
+            ->where('consumers.first_name', 'LIKE', "%$request->keyword%")
+            ->orWhere('consumers.last_name', 'LIKE', "%$request->keyword%")
+            ->orWhere('consumers.nickname', 'LIKE', "%$request->keyword%")
         ->get();
         Session::put('consumerSearchResults', $consumers);
         return Redirect::to('/consumer/list');
