@@ -1,0 +1,14 @@
+.idea
+
+model/schema.mwb.bak
+
+*~
+
+*#
+
+laravel-src/vendor
+
+laravel-src/node_modules
+
+laravel-src/.env
+
