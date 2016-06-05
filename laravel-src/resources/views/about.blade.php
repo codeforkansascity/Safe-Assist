@@ -3,8 +3,9 @@
 @section('content')
 
     <h2>Our Purpose</h2>
-    <p>The purpose of Safe Assist is to provide information about your at-risk dependent to safety personnel.  Dependents that are at-risk include children and adults who may have difficulty communicating and/other special needs due to Alzheimer’s disease, dementia, autism, down syndrome, developmental or cognitive disability, and mental disabilities. 
-    The Kansas City Police Department would appreciate your help in providing them with information that may help your loved one in time of need.
+    <p> SafeAssist is an open-source, collaborative effort initiated by the Kansas City Missouri Police Department to provide officers and other first responders with information to aid them in more effectively managing 
+    contacts with individual with special needs. SafeAssist was created to provide a vehicle for caregivers and individuals to share pertinent health and behavioral information to help first responders process the dynamics 
+    of those service calls much more effectively and safely, while increasing the overall quality of service.
     </p>
 
     <h2>Frequently Asked Questions</h2>
