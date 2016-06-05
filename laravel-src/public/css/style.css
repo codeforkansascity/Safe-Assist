@@ -215,13 +215,21 @@
 		opacity:.80;
 		filter: alpha(opacity=80);
 	}
-	
+
+	#loginDialog {
+		max-height: 400px;
+	}
+
 	dialog {
 		display: block;
 		position: fixed;
 		top: 50px;
-		width: 250px;
-		height: 300px;
+		min-width: 250px;
+		min-height: 300px;
+		max-width: 700px;
+		max-height: 800px;
+		width: 70%;
+		height: 80%;
 		padding: 16px;
 		border: 16px solid black;
 		background-color: white;
