@@ -1,5 +1,5 @@
 <div class="form_row">
-	<div class="label">{{$description}}</div>
+	<label>{{$description}}</label>
 	@if(isset($values))
 	<select name="{{$name}}[]"  multiple  >
 	@else
