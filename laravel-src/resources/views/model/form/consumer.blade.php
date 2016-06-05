@@ -21,7 +21,7 @@
 		'value' => $consumer ? $consumer->gender : NULL,
 		'options' => Consumer::$gender_options
 	])
-	@include('model.form.textfield', ['name' => 'dob', 'description' => 'Date of Birth',
+	@include('model.form.datefield', ['name' => 'dob', 'description' => 'Date of Birth',
 		'value' => $consumer ? $consumer->dob : NULL])
 	@include('model.form.textfield', ['name' => 'ssn', 'description' => 'Social Security Number',
 		'value' => $consumer ? $consumer->ssn : NULL])
